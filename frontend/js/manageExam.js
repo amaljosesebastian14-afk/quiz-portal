@@ -9,7 +9,7 @@ async function loadExams() {
 
     const response =
     await fetch(
-        "http://localhost:5000/api/exam/list",
+        "https://quiz-portal-1lia.onrender.com/api/exam/list",
         {
             headers:{
                 "Authorization":

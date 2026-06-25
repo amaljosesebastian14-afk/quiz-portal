@@ -253,7 +253,7 @@ try{
 
     const response =
     await fetch(
-        "http://localhost:5000/api/result/submit",
+        "https://quiz-portal-1lia.onrender.com/api/result/submit",
         {
             method:"POST",
 

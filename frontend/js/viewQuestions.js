@@ -11,7 +11,7 @@ async function loadQuestions(){
 
         const response =
         await fetch(
-            `http://localhost:5000/api/question/exam/${examId}`
+            `https://quiz-portal-1lia.onrender.com/api/question/exam/${examId}`
         );
 
         const data =
