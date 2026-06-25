@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Exam</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>Quiz Admin</h2>
+
+    <div>
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="manage-exams.html">Manage Exams</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>📝 Create New Exam</h2>
+
+        <label>Exam Title</label>
+        <input
+            type="text"
+            id="title"
+            placeholder="Node.js Quiz">
+
+        <label>Description</label>
+        <textarea
+            id="description"
+            rows="4"
+            placeholder="Enter exam description">
+        </textarea>
+
+        <label>Duration (Minutes)</label>
+        <input
+            type="number"
+            id="duration"
+            placeholder="60">
+
+        <label>Total Questions</label>
+        <input
+            type="number"
+            id="totalQuestions"
+            placeholder="20">
+
+        <button onclick="createExam()">
+            Create Exam
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h2>📋 Preview</h2>
+
+        <p>
+            <strong>Title:</strong>
+            <span id="previewTitle">-</span>
+        </p>
+
+        <p>
+            <strong>Description:</strong>
+            <span id="previewDescription">-</span>
+        </p>
+
+        <p>
+            <strong>Duration:</strong>
+            <span id="previewDuration">0</span>
+            Minutes
+        </p>
+
+        <p>
+            <strong>Total Questions:</strong>
+            <span id="previewQuestions">0</span>
+        </p>
+
+    </div>
+
+</div>
+
+<script src="js/createExam.js"></script>
+
+</body>
+</html>

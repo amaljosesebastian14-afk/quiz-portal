@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>Quiz Admin</h2>
+
+    <div>
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>🛠 Admin Dashboard</h1>
+
+    <p class="welcome">
+        Welcome Admin 👋
+    </p>
+
+    <div class="dashboard-grid">
+
+        <div class="stat-card">
+            <h2 id="totalExams">0</h2>
+            <p>Total Exams</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 id="totalQuestions">0</h2>
+            <p>Total Questions</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 id="totalUsers">0</h2>
+            <p>Total Users</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 id="totalAttempts">0</h2>
+            <p>Total Attempts</p>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="dashboard-grid">
+
+        <div class="card">
+            <h2>📝 Create Exam</h2>
+            <p>Create a new quiz exam.</p>
+
+            <a href="create-exam.html">
+                <button>Create Exam</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>❓ Add Question</h2>
+            <p>Add questions to exams.</p>
+
+            <a href="add-question.html">
+                <button>Add Question</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>📚 Manage Exams</h2>
+            <p>Edit or delete exams.</p>
+
+            <a href="manage-exams.html">
+                <button>Manage Exams</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>📊 Analytics</h2>
+            <p>View platform statistics.</p>
+
+            <a href="admin-analytics.html">
+                <button>Analytics</button>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/adminDashboard.js"></script>
+
+<script>
+function logout(){
+
+    localStorage.clear();
+
+    window.location =
+    "login.html";
+}
+</script>
+
+</body>
+</html>

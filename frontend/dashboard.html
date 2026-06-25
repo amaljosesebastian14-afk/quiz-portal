@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>Quiz Portal</h2>
+
+    <div>
+        <a href="dashboard.html">Home</a>
+        <a href="history.html">My Results</a>
+        <a href="leaderboard.html">
+            Leaderboard
+        </a>
+        <a href="profile.html">Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>📚 Available Exams</h1>
+
+    <p class="welcome">
+        Welcome back! Select an exam to begin.
+    </p>
+
+    <div id="examContainer" class="dashboard-grid">
+
+    </div>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+<script>
+function logout(){
+
+    localStorage.clear();
+
+    window.location =
+    "login.html";
+}
+</script>
+
+</body>
+</html>

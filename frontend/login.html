@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quiz Portal Login</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+<body class="auth-body">
+
+    <div class="login-container">
+
+        <!-- Left Section -->
+
+        <div class="login-left">
+
+            <h1>🎓 Quiz Portal</h1>
+
+            <p>
+                Take online exams, track your scores,
+                and compete on the leaderboard.
+            </p>
+
+            <img
+                <img
+                src="https://cdn-icons-png.flaticon.com/512/2436/2436874.png"
+                alt="Online Examination"
+            >
+            >
+
+        </div>
+
+        <!-- Right Section -->
+
+        <div class="login-right">
+
+            <div class="login-card">
+
+                <h2>🔐 Welcome Back</h2>
+
+                <p class="subtitle">
+                    Sign in to continue
+                </p>
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter Email"
+                >
+
+                <label>Password</label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter Password"
+                    >
+
+                    <span onclick="togglePassword()">
+                        👁️
+                    </span>
+
+                </div>
+
+                <button onclick="login()">
+                    Login
+                </button>
+
+                <p class="register-link">
+
+                    Don't have an account?
+
+                    <a href="signup.html">
+                        Sign Up
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function togglePassword(){
+
+            const password =
+            document.getElementById("password");
+
+            password.type =
+            password.type === "password"
+            ? "text"
+            : "password";
+
+        }
+    </script>
+
+    <script
+        type="module"
+        src="js/login.js">
+    </script>
+
+</body>
+</html>

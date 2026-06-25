@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Analytics</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <h1>📊 Admin Analytics</h1>
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <h2 id="totalUsers">0</h2>
+            <p>Total Users</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 id="totalExams">0</h2>
+            <p>Total Exams</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 id="totalAttempts">0</h2>
+            <p>Total Attempts</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 id="avgScore">0%</h2>
+            <p>Average Score</p>
+        </div>
+
+    </div>
+
+    <div class="recent-section">
+
+        <h2>Recent Results</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>User Email</th>
+                    <th>Exam Name</th>
+                    <th>Score</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+
+            <tbody id="resultTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="js/adminAnalytics.js"></script>
+
+</body>
+</html>

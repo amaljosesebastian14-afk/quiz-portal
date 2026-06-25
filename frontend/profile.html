@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <h2>Quiz Portal</h2>
+
+        <div>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="history.html">
+                History
+            </a>
+
+            <a href="leaderboard.html">
+                Leaderboard
+            </a>
+
+            <a href="#" onclick="logout()">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+    <div class="container">
+
+        <div class="card profile-card">
+
+            <div class="profile-header">
+
+                <div class="profile-avatar">
+                    👤
+                </div>
+
+                <h1>
+                    My Profile
+                </h1>
+
+                <p id="email">
+                    Loading...
+                </p>
+
+            </div>
+
+            <div class="profile-info">
+
+                <div class="stat-card">
+
+                    <h2 id="name">
+                        -
+                    </h2>
+
+                    <p>
+                        Name
+                    </p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h2 id="attempts">
+                        0
+                    </h2>
+
+                    <p>
+                        Exams Attempted
+                    </p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h2 id="highestScore">
+                        0
+                    </h2>
+
+                    <p>
+                        Highest Score
+                    </p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h2 id="avgScore">
+                        0%
+                    </h2>
+
+                    <p>
+                        Average Score
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <a href="history.html">
+                    <button class="btn-primary">
+                        📊 Exam History
+                    </button>
+                </a>
+
+                <a href="leaderboard.html">
+                    <button class="btn-success">
+                        🏆 Leaderboard
+                    </button>
+                </a>
+
+                <a href="dashboard.html">
+                    <button>
+                        📝 Take Exam
+                    </button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/profile.js"></script>
+
+    <script>
+
+        function logout(){
+
+            localStorage.clear();
+
+            window.location =
+            "login.html";
+
+        }
+
+    </script>
+
+</body>
+</html>

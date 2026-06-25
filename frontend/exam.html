@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Online Exam</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+
+    <h2>📝 Quiz Portal</h2>
+
+    <div>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="history.html">Results</a>
+    </div>
+
+</nav>
+
+<div class="exam-wrapper">
+
+    <div class="exam-header">
+
+        <div class="exam-title">
+            <h1>Online Examination</h1>
+            <p>Answer all questions before time expires</p>
+        </div>
+
+        <div class="timer-box">
+            ⏰ <span id="timer">10:00</span>
+        </div>
+
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <form id="examForm"></form>
+
+    <div class="submit-section">
+
+        <button
+            type="button"
+            class="submit-btn"
+            onclick="submitExam()">
+
+            🚀 Submit Exam
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="js/exam.js"></script>
+
+</body>
+</html>

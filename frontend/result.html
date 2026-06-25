@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Result</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <h2>Quiz Portal</h2>
+
+        <div>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="history.html">
+                My Results
+            </a>
+
+            <a href="leaderboard.html">
+                Leaderboard
+            </a>
+
+        </div>
+
+    </nav>
+
+    <div class="container">
+
+        <div class="card result-card">
+
+            <h1>
+                🎉 Exam Completed
+            </h1>
+
+            <p class="welcome">
+                Your assessment has been submitted successfully.
+            </p>
+
+            <div class="result-box">
+
+                <h2>
+                    Score
+                </h2>
+
+                <h1 id="score">
+                    0
+                </h1>
+
+            </div>
+
+            <div class="result-box">
+
+                <h2>
+                    Percentage
+                </h2>
+
+                <h1 id="percentage">
+                    0%
+                </h1>
+
+            </div>
+
+            <div id="performance">
+
+            </div>
+
+            <div class="action-buttons">
+
+                <button
+                    onclick="goLeaderboard()"
+                >
+                    🏆 Leaderboard
+                </button>
+
+                <button
+                    onclick="goHistory()"
+                >
+                    📊 My Results
+                </button>
+
+                <button
+                    onclick="goDashboard()"
+                >
+                    📚 Dashboard
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/result.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Question</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Edit Question</h2>
+
+        <input
+        id="question"
+        placeholder="Question">
+
+        <input
+        id="option1"
+        placeholder="Option 1">
+
+        <input
+        id="option2"
+        placeholder="Option 2">
+
+        <input
+        id="option3"
+        placeholder="Option 3">
+
+        <input
+        id="option4"
+        placeholder="Option 4">
+
+        <select id="correctAnswer">
+
+            <option value="0">
+                Option 1
+            </option>
+
+            <option value="1">
+                Option 2
+            </option>
+
+            <option value="2">
+                Option 3
+            </option>
+
+            <option value="3">
+                Option 4
+            </option>
+
+        </select>
+
+        <button
+        onclick="updateQuestion()">
+        Update Question
+        </button>
+
+    </div>
+
+</div>
+
+<script src="js/editQuestion.js"></script>
+
+</body>
+</html>

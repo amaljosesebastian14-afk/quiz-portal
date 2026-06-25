@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>My Exam History</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <h2>Quiz Portal</h2>
+
+        <div>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="#" onclick="logout()">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+    <div class="container">
+
+        <h1>📊 My Exam History</h1>
+
+        <p class="welcome">
+            View all your exam attempts and scores.
+        </p>
+
+        <div class="card">
+
+            <div class="table-container">
+
+                <table class="history-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Exam Name
+                            </th>
+
+                            <th>
+                                Score
+                            </th>
+
+                            <th>
+                                Percentage
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="historyTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/history.js"></script>
+
+    <script>
+
+        function logout(){
+
+            localStorage.clear();
+
+            window.location =
+            "login.html";
+        }
+
+    </script>
+
+</body>
+</html>

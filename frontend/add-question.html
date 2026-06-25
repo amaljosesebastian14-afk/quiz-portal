@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Question</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Add Question</h2>
+
+        <label>Exam</label>
+
+        <select id="examSelect"></select>
+
+        <label>Question</label>
+
+        <textarea
+            id="question"
+            rows="3"
+            placeholder="Enter Question">
+        </textarea>
+
+        <label>Option A</label>
+
+        <input
+            type="text"
+            id="option1"
+            placeholder="Enter Option A">
+
+        <label>Option B</label>
+
+        <input
+            type="text"
+            id="option2"
+            placeholder="Enter Option B">
+
+        <label>Option C</label>
+
+        <input
+            type="text"
+            id="option3"
+            placeholder="Enter Option C">
+
+        <label>Option D</label>
+
+        <input
+            type="text"
+            id="option4"
+            placeholder="Enter Option D">
+
+        <label>Correct Answer</label>
+
+        <select id="correctAnswer">
+
+            <option value="0">Option A</option>
+            <option value="1">Option B</option>
+            <option value="2">Option C</option>
+            <option value="3">Option D</option>
+
+        </select>
+
+        <button onclick="addQuestion()">
+            Add Question
+        </button>
+
+    </div>
+
+</div>
+
+<script src="js/addQuestion.js"></script>
+
+</body>
+</html>

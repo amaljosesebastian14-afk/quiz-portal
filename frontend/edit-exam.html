@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Exam</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Edit Exam</h2>
+
+        <input
+        type="text"
+        id="title"
+        placeholder="Exam Title">
+
+        <br><br>
+
+        <input
+        type="text"
+        id="description"
+        placeholder="Description">
+
+        <br><br>
+
+        <input
+        type="number"
+        id="duration"
+        placeholder="Duration">
+
+        <br><br>
+
+        <input
+        type="number"
+        id="totalQuestions"
+        placeholder="Total Questions">
+
+        <br><br>
+
+        <select id="status">
+
+            <option value="active">
+                Active
+            </option>
+
+            <option value="inactive">
+                Inactive
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <button onclick="updateExam()">
+            Update Exam
+        </button>
+
+    </div>
+
+</div>
+
+<script src="js/editExam.js"></script>
+
+</body>
+</html>
