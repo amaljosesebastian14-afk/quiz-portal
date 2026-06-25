@@ -101,7 +101,7 @@ async function createExam() {
 
         const response =
         await fetch(
-            "http://localhost:5000/api/exam/create",
+            "https://quiz-portal-1lia.onrender.com/api/exam/create",
             {
                 method: "POST",
 

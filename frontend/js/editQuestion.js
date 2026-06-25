@@ -53,7 +53,7 @@ async function updateQuestion(){
 
     const response =
     await fetch(
-        `http://localhost:5000/api/question/${questionId}`,
+        `https://quiz-portal-1lia.onrender.com/api/question/${questionId}`,
         {
             method:"PUT",
 

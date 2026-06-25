@@ -16,7 +16,7 @@ async function loadLeaderboard() {
 
         const response =
         await fetch(
-            `http://localhost:5000/api/result/leaderboard/${examId}`
+            `https://quiz-portal-1lia.onrender.com/api/result/leaderboard/${examId}`
         );
 
         const data =

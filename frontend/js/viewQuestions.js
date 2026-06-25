@@ -114,7 +114,7 @@ async function deleteQuestion(id){
 
         const response =
         await fetch(
-            `http://localhost:5000/api/question/${id}`,
+            `https://quiz-portal-1lia.onrender.com/api/question/${id}`,
             {
                 method:"DELETE"
             }

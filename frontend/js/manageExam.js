@@ -115,7 +115,7 @@ async function deleteExam(id) {
     );
 
     await fetch(
-        `http://localhost:5000/api/exam/${id}`,
+        `https://quiz-portal-1lia.onrender.com/api/exam/${id}`,
         {
             method: "DELETE",
 

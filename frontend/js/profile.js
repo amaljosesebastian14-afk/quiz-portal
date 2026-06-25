@@ -6,7 +6,7 @@ async function loadProfile() {
 
         const response =
         await fetch(
-            "http://localhost:5000/api/profile",
+            "https://quiz-portal-1lia.onrender.com/api/profile",
             {
                 headers:{
                     Authorization:

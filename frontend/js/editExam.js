@@ -9,7 +9,7 @@ async function loadExam(){
 
     const response =
     await fetch(
-        `http://localhost:5000/api/exam/${examId}`
+        `https://quiz-portal-1lia.onrender.com/api/exam/${examId}`
     );
 
     const data =
@@ -53,7 +53,7 @@ async function updateExam(){
 
     const response =
     await fetch(
-        `http://localhost:5000/api/exam/${examId}`,
+        `https://quiz-portal-1lia.onrender.com/api/exam/${examId}`,
         {
             method:"PUT",
 

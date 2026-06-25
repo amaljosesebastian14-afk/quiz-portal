@@ -6,7 +6,7 @@ async function loadDashboard() {
 
         const response =
         await fetch(
-            "http://localhost:5000/api/analytics/dashboard"
+            "https://quiz-portal-1lia.onrender.com/api/analytics/dashboard"
         );
 
         const data =
