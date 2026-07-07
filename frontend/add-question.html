@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Question</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -24,33 +26,41 @@
             placeholder="Enter Question">
         </textarea>
 
-        <label>Option A</label>
+        <div class="field-row">
 
-        <input
-            type="text"
-            id="option1"
-            placeholder="Enter Option A">
+            <div>
+                <label>Option A</label>
+                <input
+                    type="text"
+                    id="option1"
+                    placeholder="Enter Option A">
+            </div>
 
-        <label>Option B</label>
+            <div>
+                <label>Option B</label>
+                <input
+                    type="text"
+                    id="option2"
+                    placeholder="Enter Option B">
+            </div>
 
-        <input
-            type="text"
-            id="option2"
-            placeholder="Enter Option B">
+            <div>
+                <label>Option C</label>
+                <input
+                    type="text"
+                    id="option3"
+                    placeholder="Enter Option C">
+            </div>
 
-        <label>Option C</label>
+            <div>
+                <label>Option D</label>
+                <input
+                    type="text"
+                    id="option4"
+                    placeholder="Enter Option D">
+            </div>
 
-        <input
-            type="text"
-            id="option3"
-            placeholder="Enter Option C">
-
-        <label>Option D</label>
-
-        <input
-            type="text"
-            id="option4"
-            placeholder="Enter Option D">
+        </div>
 
         <label>Correct Answer</label>
 
@@ -63,7 +73,7 @@
 
         </select>
 
-        <button onclick="addQuestion()">
+        <button class="btn-full" onclick="addQuestion()">
             Add Question
         </button>
 

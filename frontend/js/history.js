@@ -3,7 +3,21 @@ JSON.parse(
     localStorage.getItem("user")
 );
 
-loadHistory();
+if (!user) {
+
+    alert(
+        "Please login again"
+    );
+
+    window.location =
+    "login.html";
+
+}
+else {
+
+    loadHistory();
+
+}
 
 async function loadHistory() {
 
@@ -26,7 +40,7 @@ async function loadHistory() {
 
             html = `
             <tr>
-                <td colspan="4">
+                <td colspan="4" class="no-data">
                     No Exam History Found
                 </td>
             </tr>
@@ -90,7 +104,7 @@ async function loadHistory() {
         )
         .innerHTML = `
         <tr>
-            <td colspan="4">
+            <td colspan="4" class="no-data">
                 Failed to load history
             </td>
         </tr>

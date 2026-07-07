@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Question</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -8,30 +10,48 @@
 
 <div class="container">
 
-    <div class="card">
+    <div class="card form-card">
 
         <h2>Edit Question</h2>
 
+        <label>Question</label>
         <input
         id="question"
         placeholder="Question">
 
-        <input
-        id="option1"
-        placeholder="Option 1">
+        <div class="field-row">
 
-        <input
-        id="option2"
-        placeholder="Option 2">
+            <div>
+                <label>Option 1</label>
+                <input
+                id="option1"
+                placeholder="Option 1">
+            </div>
 
-        <input
-        id="option3"
-        placeholder="Option 3">
+            <div>
+                <label>Option 2</label>
+                <input
+                id="option2"
+                placeholder="Option 2">
+            </div>
 
-        <input
-        id="option4"
-        placeholder="Option 4">
+            <div>
+                <label>Option 3</label>
+                <input
+                id="option3"
+                placeholder="Option 3">
+            </div>
 
+            <div>
+                <label>Option 4</label>
+                <input
+                id="option4"
+                placeholder="Option 4">
+            </div>
+
+        </div>
+
+        <label>Correct Answer</label>
         <select id="correctAnswer">
 
             <option value="0">
@@ -53,6 +73,7 @@
         </select>
 
         <button
+        class="btn-full"
         onclick="updateQuestion()">
         Update Question
         </button>

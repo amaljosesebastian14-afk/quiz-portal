@@ -2,6 +2,9 @@
 <html>
 <head>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Manage Exams</title>
 
     <link
@@ -13,9 +16,11 @@
 
 <body>
 
-    <nav class="navbar">
+    <nav class="navbar" id="mainNav">
 
         <h2>Quiz Admin</h2>
+
+        <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('menu-open')" aria-label="Toggle menu">☰</button>
 
         <div>
 
@@ -43,41 +48,45 @@
                 📚 Manage Exams
             </h2>
 
-            <table>
+            <div class="table-container">
 
-                <thead>
+                <table class="manage-table">
 
-                    <tr>
+                    <thead>
 
-                        <th>
-                            Title
-                        </th>
+                        <tr>
 
-                        <th>
-                            Duration
-                        </th>
+                            <th>
+                                Title
+                            </th>
 
-                        <th>
-                            Questions
-                        </th>
+                            <th>
+                                Duration
+                            </th>
 
-                        <th>
-                            Status
-                        </th>
+                            <th>
+                                Questions
+                            </th>
 
-                        <th>
-                            Actions
-                        </th>
+                            <th>
+                                Status
+                            </th>
 
-                    </tr>
+                            <th>
+                                Actions
+                            </th>
 
-                </thead>
+                        </tr>
 
-                <tbody id="examContainer">
+                    </thead>
 
-                </tbody>
+                    <tbody id="examContainer">
 
-            </table>
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 

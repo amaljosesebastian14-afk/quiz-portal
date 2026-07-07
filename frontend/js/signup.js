@@ -6,6 +6,32 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
+function friendlyError(error){
+
+    const code =
+    error.code || "";
+
+    if(code === "auth/email-already-in-use"){
+        return "That email is already registered. Try logging in instead.";
+    }
+
+    if(code === "auth/invalid-email"){
+        return "Please enter a valid email address.";
+    }
+
+    if(code === "auth/weak-password"){
+        return "Password should be at least 6 characters.";
+    }
+
+    if(code === "auth/network-request-failed"){
+        return "Network error. Please check your connection and try again.";
+    }
+
+    return error.message ||
+    "Something went wrong. Please try again.";
+
+}
+
 window.signup =
 async function(){
 
@@ -63,6 +89,7 @@ async function(){
         const firebaseUser =
         userCredential.user;
 
+        const response =
         await fetch(
             "https://quiz-portal-1lia.onrender.com/api/auth/login",
             {
@@ -85,6 +112,21 @@ async function(){
             }
         );
 
+        const data =
+        await response.json();
+
+        if(
+            !response.ok ||
+            data.success === false
+        ){
+
+            throw new Error(
+                data.message ||
+                "Account was created, but saving your profile failed. Please contact support or try logging in."
+            );
+
+        }
+
         alert(
             "Signup Successful"
         );
@@ -96,7 +138,7 @@ async function(){
     catch(error){
 
         alert(
-            error.message
+            friendlyError(error)
         );
 
     }

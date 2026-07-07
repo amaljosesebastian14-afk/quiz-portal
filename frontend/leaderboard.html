@@ -2,6 +2,9 @@
 <html>
 <head>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Leaderboard</title>
 
     <link
@@ -13,9 +16,11 @@
 
 <body>
 
-    <nav class="navbar">
+    <nav class="navbar" id="mainNav">
 
         <h2>Quiz Portal</h2>
+
+        <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('menu-open')" aria-label="Toggle menu">☰</button>
 
         <div>
 
@@ -47,41 +52,45 @@
 
         <div class="card">
 
-            <table>
+            <div class="table-container">
 
-                <thead>
+                <table class="leaderboard-table">
 
-                    <tr>
+                    <thead>
 
-                        <th>
-                            Rank
-                        </th>
+                        <tr>
 
-                        <th>
-                            Name
-                        </th>
+                            <th>
+                                Rank
+                            </th>
 
-                        <th>
-                            Email
-                        </th>
+                            <th>
+                                Name
+                            </th>
 
-                        <th>
-                            Score
-                        </th>
+                            <th>
+                                Email
+                            </th>
 
-                        <th>
-                            Percentage
-                        </th>
+                            <th>
+                                Score
+                            </th>
 
-                    </tr>
+                            <th>
+                                Percentage
+                            </th>
 
-                </thead>
+                        </tr>
 
-                <tbody id="leaderboard">
+                    </thead>
 
-                </tbody>
+                    <tbody id="leaderboard">
 
-            </table>
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 

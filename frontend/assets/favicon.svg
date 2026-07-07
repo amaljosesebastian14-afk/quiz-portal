@@ -1,0 +1,12 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&amp;display=swap');
+.bin{font-family:'Baloo 2',sans-serif;font-weight:800;}
+</style>
+</defs>
+<rect x="4" y="4" width="112" height="112" rx="24" fill="#12153D" stroke="#262B66" stroke-width="2"/>
+<line x1="60" y1="22" x2="60" y2="98" stroke="#262B66" stroke-width="2"/>
+<text x="36" y="76" class="bin" font-size="52" fill="#D4FF3F" text-anchor="middle">1</text>
+<text x="84" y="76" class="bin" font-size="52" fill="#F5F6FF" text-anchor="middle">0</text>
+</svg>

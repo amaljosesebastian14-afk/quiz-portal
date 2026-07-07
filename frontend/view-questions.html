@@ -3,6 +3,9 @@
 
 <head>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Manage Questions</title>
 
     <link
@@ -14,9 +17,11 @@
 
 <body>
 
-    <nav class="navbar">
+    <nav class="navbar" id="mainNav">
 
         <h2>Quiz Admin</h2>
+
+        <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('menu-open')" aria-label="Toggle menu">☰</button>
 
         <div>
 
@@ -46,7 +51,7 @@
 
             <div class="table-container">
 
-                <table class="manage-table">
+                <table class="manage-table three-col">
 
                     <thead>
 
