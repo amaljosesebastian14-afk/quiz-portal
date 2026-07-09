@@ -9,11 +9,6 @@ async function loadLeaderboard() {
             "examId"
         );
 
-        console.log(
-            "Exam ID:",
-            examId
-        );
-
         const response =
         await fetch(
             `https://quiz-portal-1lia.onrender.com/api/result/leaderboard/${examId}`
@@ -21,8 +16,6 @@ async function loadLeaderboard() {
 
         const data =
         await response.json();
-
-        console.log(data);
 
         let html = "";
 
@@ -36,11 +29,11 @@ async function loadLeaderboard() {
 
                     html += `
                     <tr>
-                        <td>${index + 1}</td>
-                        <td>${user.name}</td>
-                        <td>${user.email}</td>
-                        <td>${user.score}</td>
-                        <td>${user.percentage}%</td>
+                        <td data-label="Rank">${index + 1}</td>
+                        <td data-label="Name">${user.name}</td>
+                        <td data-label="Email">${user.email}</td>
+                        <td data-label="Score">${user.score}</td>
+                        <td data-label="Percentage">${user.percentage}%</td>
                     </tr>
                     `;
                 }
@@ -50,7 +43,7 @@ async function loadLeaderboard() {
 
             html = `
             <tr>
-                <td colspan="5">
+                <td colspan="5" class="no-data">
                     No leaderboard data found
                 </td>
             </tr>
@@ -68,6 +61,17 @@ async function loadLeaderboard() {
 
         console.error(error);
 
+        document
+        .getElementById(
+            "leaderboard"
+        )
+        .innerHTML = `
+        <tr>
+            <td colspan="5" class="no-data">
+                Failed to load leaderboard
+            </td>
+        </tr>
+        `;
     }
 
 }

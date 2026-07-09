@@ -385,6 +385,10 @@ tbody tr:hover{
    add class="table-cards" to a table-container to enable */
 @media(max-width:640px){
 
+    .table-cards table{
+        min-width:0 !important;
+    }
+
     .table-cards table,
     .table-cards thead,
     .table-cards tbody,
@@ -1326,6 +1330,16 @@ RESPONSIVE
     .login-container,
     .dashboard-grid{
         grid-template-columns:1fr;
+    }
+
+    .login-right{
+        order:-1;
+    }
+
+    .stats-row,
+    .feature-list,
+    .login-illustration{
+        display:none;
     }
 
     .dashboard{

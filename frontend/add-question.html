@@ -4,13 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Question</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<nav class="navbar" id="mainNav">
+
+    <img src="assets/logo.svg" alt="Trivio" class="navbar-logo">
+
+    <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('menu-open')" aria-label="Toggle menu">☰</button>
+
+    <div>
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="manage-exams.html">Manage Exams</a>
+        <a href="add-question.html">Add Question</a>
+    </div>
+
+</nav>
+
 <div class="container">
 
-    <div class="card">
+    <div class="card form-card">
 
         <h2>Add Question</h2>
 

@@ -54,21 +54,21 @@ async function loadHistory() {
 
                 <tr>
 
-                    <td>
+                    <td data-label="Exam Name">
                         ${result.examTitle || "-"}
                     </td>
 
-                    <td>
+                    <td data-label="Score">
                         ${result.score || 0}
                         /
                         ${result.totalQuestions || 0}
                     </td>
 
-                    <td>
+                    <td data-label="Percentage">
                         ${result.percentage || 0}%
                     </td>
 
-                    <td>
+                    <td data-label="Date">
                         ${
                             result.submittedAt
                             ? new Date(
