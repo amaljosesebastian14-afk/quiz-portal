@@ -710,6 +710,75 @@ RESULT PAGE
     color:var(--text);
 }
 
+#aiSection{
+    border-top:1px solid var(--border);
+    padding-top:24px;
+}
+
+#aiSection > h2{
+    font-family:var(--font-display);
+    font-size:18px;
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:16px;
+}
+
+.ai-explanation-card{
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    margin-bottom:14px;
+}
+
+.ai-explanation-card .ai-question{
+    font-weight:600;
+    color:var(--text);
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.ai-explanation-card .ai-answer-row{
+    display:flex;
+    gap:8px;
+    font-size:13px;
+    margin-bottom:4px;
+}
+
+.ai-explanation-card .ai-answer-row .label{
+    color:var(--text-faint);
+    min-width:95px;
+}
+
+.ai-explanation-card .ai-answer-row.correct .value{
+    color:var(--success);
+    font-weight:600;
+}
+
+.ai-explanation-card .ai-answer-row.wrong .value{
+    color:var(--danger);
+    font-weight:600;
+}
+
+.ai-explanation-card .ai-explanation-text{
+    color:var(--text-muted);
+    font-size:14px;
+    line-height:1.6;
+    margin-top:12px;
+}
+
+.ai-explanation-card .ai-tip{
+    display:flex;
+    gap:8px;
+    background:var(--bg);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    padding:10px 12px;
+    margin-top:12px;
+    font-size:13px;
+    color:var(--text-muted);
+}
+
 .manage-table.three-col th:nth-child(1),
 .manage-table.three-col td:nth-child(1){
     width:40%;

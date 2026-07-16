@@ -4,6 +4,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
     <title>Result</title>
 
@@ -16,97 +17,109 @@
 
 <body>
 
-    <nav class="navbar" id="mainNav">
+<nav class="navbar" id="mainNav">
 
-        <h2>Quiz Portal</h2>
+    <img src="assets/logo.svg" alt="Trivio" class="navbar-logo">
 
-        <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('menu-open')" aria-label="Toggle menu">☰</button>
+    <button class="menu-toggle"
+        onclick="document.getElementById('mainNav').classList.toggle('menu-open')"
+        aria-label="Toggle menu">
 
-        <div>
+        ☰
 
-            <a href="dashboard.html">
-                Dashboard
-            </a>
+    </button>
 
-            <a href="history.html">
-                My Results
-            </a>
+    <div>
 
-            <a href="leaderboard.html">
-                Leaderboard
-            </a>
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="history.html">
+            My Results
+        </a>
+
+        <a href="leaderboard.html">
+            Leaderboard
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <div class="card result-card">
+
+        <h1>
+            🎉 Exam Completed
+        </h1>
+
+        <p class="welcome">
+            Your assessment has been submitted successfully.
+        </p>
+
+        <div class="result-box">
+
+            <h2>
+                Score
+            </h2>
+
+            <h1 id="score">
+                0
+            </h1>
 
         </div>
 
-    </nav>
+        <div class="result-box">
 
-    <div class="container">
+            <h2>
+                Percentage
+            </h2>
 
-        <div class="card result-card">
-
-            <h1>
-                🎉 Exam Completed
+            <h1 id="percentage">
+                0%
             </h1>
 
-            <p class="welcome">
-                Your assessment has been submitted successfully.
-            </p>
+        </div>
 
-            <div class="result-box">
+        <div id="performance"></div>
 
-                <h2>
-                    Score
-                </h2>
+        <!-- AI Explanation Section -->
 
-                <h1 id="score">
-                    0
-                </h1>
+        <div
+            id="aiSection"
+            style="display:none; margin-top:30px; text-align:left;">
 
-            </div>
+            <h2>
+                🤖 AI Explanation
+            </h2>
 
-            <div class="result-box">
+            <div id="aiContent"></div>
 
-                <h2>
-                    Percentage
-                </h2>
+        </div>
 
-                <h1 id="percentage">
-                    0%
-                </h1>
+        <div class="action-buttons">
 
-            </div>
+            <button onclick="goLeaderboard()">
+                🏆 Leaderboard
+            </button>
 
-            <div id="performance">
+            <button onclick="goHistory()">
+                📊 My Results
+            </button>
 
-            </div>
-
-            <div class="action-buttons">
-
-                <button
-                    onclick="goLeaderboard()"
-                >
-                    🏆 Leaderboard
-                </button>
-
-                <button
-                    onclick="goHistory()"
-                >
-                    📊 My Results
-                </button>
-
-                <button
-                    onclick="goDashboard()"
-                >
-                    📚 Dashboard
-                </button>
-
-            </div>
+            <button onclick="goDashboard()">
+                📚 Dashboard
+            </button>
 
         </div>
 
     </div>
 
-    <script src="js/result.js"></script>
+</div>
+
+<script src="js/result.js"></script>
 
 </body>
 </html>
