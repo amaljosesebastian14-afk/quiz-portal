@@ -13,6 +13,7 @@ const questionRoutes = require("./routes/questionRoutes");
 const resultRoutes = require("./routes/resultRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
 const profileRoutes = require("./routes/profileRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/api/question", questionRoutes);
 app.use("/api/result", resultRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/ai", aiRoutes);
 
 app.get("/", (req, res) => {
     res.json({
