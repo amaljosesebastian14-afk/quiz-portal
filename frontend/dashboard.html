@@ -15,21 +15,25 @@
     <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('menu-open')" aria-label="Toggle menu">☰</button>
 
     <div>
-        <a href="dashboard.html">Home</a>
-        <a href="history.html">My Results</a>
-        <a href="leaderboard.html">
+        <a href="dashboard.html" data-i18n="nav.dashboard">Home</a>
+        <a href="history.html" data-i18n="nav.myResults">My Results</a>
+        <a href="leaderboard.html" data-i18n="nav.leaderboard">
             Leaderboard
         </a>
-        <a href="profile.html">Profile</a>
-        <a href="#" onclick="logout()">Logout</a>
+        <a href="profile.html" data-i18n="nav.profile">Profile</a>
+        <select id="langSwitcher" class="lang-switcher" style="margin-left:8px;">
+            <option value="en">English</option>
+            <option value="ml">മലയാളം</option>
+        </select>
+        <a href="#" onclick="logout()" data-i18n="nav.logout">Logout</a>
     </div>
 </nav>
 
 <div class="container">
 
-    <h1>📚 Available Exams</h1>
+    <h1 data-i18n="dashboard.heading">📚 Available Exams</h1>
 
-    <p class="welcome">
+    <p class="welcome" data-i18n="dashboard.welcome">
         Welcome back! Select an exam to begin.
     </p>
 
@@ -40,6 +44,7 @@
 </div>
 
 <script src="js/dashboard.js"></script>
+<script src="assets/i18n.js"></script>
 
 <script>
 function logout(){

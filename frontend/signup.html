@@ -21,6 +21,13 @@
 
 <body class="auth-body">
 
+    <div style="position:absolute; top:20px; right:24px; z-index:2;">
+        <select id="langSwitcher" class="lang-switcher">
+            <option value="en">English</option>
+            <option value="ml">മലയാളം</option>
+        </select>
+    </div>
+
     <div class="login-container">
 
         <!-- Left Side -->
@@ -29,9 +36,9 @@
 
             <img src="assets/logo.svg" alt="Trivio" class="login-brand-logo">
 
-            <p class="login-tagline">🚀 Join Trivio</p>
+            <p class="login-tagline" data-i18n="signup.tagline">🚀 Join Trivio</p>
 
-            <p>
+            <p data-i18n="signup.heroText">
                 Create your account and start taking
                 quizzes, exams, and track your progress.
             </p>
@@ -39,15 +46,15 @@
             <div class="stats-row">
                 <div>
                     <h3 data-count="10" data-suffix="K+">0K+</h3>
-                    <p>Users</p>
+                    <p data-i18n="login.statsUsers">Users</p>
                 </div>
                 <div>
                     <h3 data-count="500" data-suffix="+">0+</h3>
-                    <p>Exams hosted</p>
+                    <p data-i18n="login.statsExams">Exams hosted</p>
                 </div>
                 <div>
                     <h3 data-count="98" data-suffix="%">0%</h3>
-                    <p>On-time rate</p>
+                    <p data-i18n="login.statsOnTime">On-time rate</p>
                 </div>
             </div>
 
@@ -56,19 +63,19 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 12L10 17L19 7" stroke="#D4FF3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Free to join, no credit card needed
+                    <span data-i18n="login.feature1">Real-time scoring and instant results</span>
                 </li>
                 <li>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 12L10 17L19 7" stroke="#D4FF3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Take exams anytime, anywhere
+                    <span data-i18n="login.feature2">Live leaderboard across every exam</span>
                 </li>
                 <li>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 12L10 17L19 7" stroke="#D4FF3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Climb the leaderboard as you learn
+                    <span data-i18n="login.feature3">Track your progress over time</span>
                 </li>
             </ul>
 
@@ -91,30 +98,32 @@
                         <path d="M6 2.5H14L19 7.5V20C19 20.83 18.33 21.5 17.5 21.5H6.5C5.67 21.5 5 20.83 5 20V4C5 3.17 5.67 2.5 6.5 2.5Z" stroke="#D4FF3F" stroke-width="2" stroke-linejoin="round"/>
                         <path d="M9 13L11 15L15.5 10" stroke="#D4FF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Create Account
+                    <span data-i18n="signup.heading">Create Account</span>
                 </h2>
 
-                <p class="subtitle">
+                <p class="subtitle" data-i18n="signup.subtitle">
                     Register to continue
                 </p>
 
-                <label>Name</label>
+                <label data-i18n="signup.nameLabel">Name</label>
 
                 <input
                     type="text"
                     id="name"
                     placeholder="Enter Full Name"
+                    data-i18n-placeholder="signup.namePlaceholder"
                 >
 
-                <label>Email</label>
+                <label data-i18n="login.emailLabel">Email</label>
 
                 <input
                     type="email"
                     id="email"
                     placeholder="Enter Email"
+                    data-i18n-placeholder="signup.emailPlaceholder"
                 >
 
-                <label>Password</label>
+                <label data-i18n="login.passwordLabel">Password</label>
 
                 <div class="password-box">
 
@@ -122,6 +131,7 @@
                         type="password"
                         id="password"
                         placeholder="Enter Password"
+                        data-i18n-placeholder="signup.passwordPlaceholder"
                     >
 
                     <span
@@ -135,7 +145,7 @@
 
                 </div>
 
-                <label>Confirm Password</label>
+                <label data-i18n="signup.confirmPasswordLabel">Confirm Password</label>
 
                 <div class="password-box">
 
@@ -143,6 +153,7 @@
                         type="password"
                         id="confirmPassword"
                         placeholder="Confirm Password"
+                        data-i18n-placeholder="signup.confirmPasswordPlaceholder"
                     >
 
                     <span
@@ -156,15 +167,15 @@
 
                 </div>
 
-                <button onclick="signup()">
+                <button onclick="signup()" data-i18n="signup.button">
                     Create Account
                 </button>
 
                 <p class="register-link">
 
-                    Already have an account?
+                    <span data-i18n="signup.haveAccount">Already have an account?</span>
 
-                    <a href="login.html">
+                    <a href="login.html" data-i18n="signup.loginLink">
                         Login
                     </a>
 
@@ -177,6 +188,7 @@
     </div>
 
     <script src="assets/entrance.js"></script>
+    <script src="assets/i18n.js"></script>
 
     <script>
 

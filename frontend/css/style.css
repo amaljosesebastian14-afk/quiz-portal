@@ -2,7 +2,7 @@
 FONTS & GLOBAL
 ========================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap');
 
 *{
     margin:0;
@@ -96,6 +96,48 @@ NAVBAR
     font-size:24px;
     cursor:pointer;
     padding:4px 8px;
+}
+
+/* =========================
+LANGUAGE SWITCHER
+========================= */
+
+.lang-switcher{
+    background:var(--surface-2);
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:7px 10px;
+    font-size:13px;
+    font-family:var(--font-body);
+    cursor:pointer;
+}
+
+.lang-switcher:focus{
+    outline:none;
+    border-color:var(--accent);
+}
+
+/* Malayalam script needs a different font (Latin fonts have no
+Malayalam glyphs) and slightly more line-height for legibility */
+
+body.lang-ml{
+    font-family:'Noto Sans Malayalam','Inter',sans-serif;
+}
+
+body.lang-ml h1,
+body.lang-ml h2,
+body.lang-ml h3,
+body.lang-ml .login-tagline,
+body.lang-ml button,
+body.lang-ml .navbar h2{
+    font-family:'Noto Sans Malayalam','Inter',sans-serif;
+}
+
+body.lang-ml p,
+body.lang-ml label,
+body.lang-ml li{
+    line-height:1.8;
 }
 
 /* =========================

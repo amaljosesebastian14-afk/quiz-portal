@@ -18,6 +18,13 @@
 
 <body class="auth-body">
 
+    <div style="position:absolute; top:20px; right:24px; z-index:2;">
+        <select id="langSwitcher" class="lang-switcher">
+            <option value="en">English</option>
+            <option value="ml">മലയാളം</option>
+        </select>
+    </div>
+
     <div class="login-container">
 
         <!-- Left Section -->
@@ -26,9 +33,9 @@
 
             <img src="assets/logo.svg" alt="Trivio" class="login-brand-logo">
 
-            <p class="login-tagline">🎓 Welcome back</p>
+            <p class="login-tagline" data-i18n="login.tagline">🎓 Welcome back</p>
 
-            <p>
+            <p data-i18n="login.heroText">
                 Take online exams, track your scores,
                 and compete on the leaderboard.
             </p>
@@ -36,15 +43,15 @@
             <div class="stats-row">
                 <div>
                     <h3 data-count="10" data-suffix="K+">0K+</h3>
-                    <p>Users</p>
+                    <p data-i18n="login.statsUsers">Users</p>
                 </div>
                 <div>
                     <h3 data-count="500" data-suffix="+">0+</h3>
-                    <p>Exams hosted</p>
+                    <p data-i18n="login.statsExams">Exams hosted</p>
                 </div>
                 <div>
                     <h3 data-count="98" data-suffix="%">0%</h3>
-                    <p>On-time rate</p>
+                    <p data-i18n="login.statsOnTime">On-time rate</p>
                 </div>
             </div>
 
@@ -53,19 +60,19 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 12L10 17L19 7" stroke="#D4FF3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Real-time scoring and instant results
+                    <span data-i18n="login.feature1">Real-time scoring and instant results</span>
                 </li>
                 <li>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 12L10 17L19 7" stroke="#D4FF3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Live leaderboard across every exam
+                    <span data-i18n="login.feature2">Live leaderboard across every exam</span>
                 </li>
                 <li>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 12L10 17L19 7" stroke="#D4FF3F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Track your progress over time
+                    <span data-i18n="login.feature3">Track your progress over time</span>
                 </li>
             </ul>
 
@@ -88,22 +95,23 @@
                         <rect x="5" y="11" width="14" height="10" rx="2.5" stroke="#D4FF3F" stroke-width="2"/>
                         <path d="M8 11V7.5C8 5 9.8 3 12 3C14.2 3 16 5 16 7.5V11" stroke="#D4FF3F" stroke-width="2" stroke-linecap="round"/>
                     </svg>
-                    Welcome Back
+                    <span data-i18n="login.heading">Welcome Back</span>
                 </h2>
 
-                <p class="subtitle">
+                <p class="subtitle" data-i18n="login.subtitle">
                     Sign in to continue
                 </p>
 
-                <label>Email</label>
+                <label data-i18n="login.emailLabel">Email</label>
 
                 <input
                     type="email"
                     id="email"
                     placeholder="Enter Email"
+                    data-i18n-placeholder="login.emailPlaceholder"
                 >
 
-                <label>Password</label>
+                <label data-i18n="login.passwordLabel">Password</label>
 
                 <div class="password-box">
 
@@ -111,6 +119,7 @@
                         type="password"
                         id="password"
                         placeholder="Enter Password"
+                        data-i18n-placeholder="login.passwordPlaceholder"
                     >
 
                     <span onclick="togglePassword()">
@@ -122,15 +131,15 @@
 
                 </div>
 
-                <button onclick="login()">
+                <button onclick="login()" data-i18n="login.button">
                     Login
                 </button>
 
                 <p class="register-link">
 
-                    Don't have an account?
+                    <span data-i18n="login.noAccount">Don't have an account?</span>
 
-                    <a href="signup.html">
+                    <a href="signup.html" data-i18n="login.signUpLink">
                         Sign Up
                     </a>
 
@@ -143,6 +152,7 @@
     </div>
 
     <script src="assets/entrance.js"></script>
+    <script src="assets/i18n.js"></script>
 
     <script>
         function togglePassword(){
