@@ -55,8 +55,10 @@ NAVBAR
     color:var(--text);
     padding:14px 24px;
     display:flex;
+    flex-wrap:wrap;
     justify-content:space-between;
     align-items:center;
+    gap:10px 20px;
     position:sticky;
     top:0;
     z-index:50;
@@ -74,12 +76,19 @@ NAVBAR
     display:block;
 }
 
+.navbar > div{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px 18px;
+}
+
 .navbar a{
     color:var(--text-muted);
     text-decoration:none;
-    margin-left:18px;
     font-weight:600;
     font-size:14px;
+    white-space:nowrap;
     transition:.2s;
 }
 
@@ -1410,6 +1419,10 @@ RESPONSIVE
         display:none;
     }
 
+    .lang-switcher{
+        display:none;
+    }
+
     .navbar .menu-toggle{
         display:block;
     }
@@ -1417,6 +1430,11 @@ RESPONSIVE
     .navbar.menu-open a{
         display:block;
         margin:12px 0 0;
+    }
+
+    .navbar.menu-open .lang-switcher{
+        display:inline-block;
+        margin-top:12px;
     }
 
     .navbar.menu-open{
