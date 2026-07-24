@@ -1397,10 +1397,15 @@ AUTH PAGES (login/signup)
 }
 
 .register-link{
+    margin-top:20px;
     text-align:center;
-    margin-top:22px;
-    font-size:13px;
-    color:var(--text-muted);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+
+    flex-wrap:wrap;
 }
 
 .register-link a{
