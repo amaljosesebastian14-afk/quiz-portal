@@ -14,19 +14,26 @@
 
     <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('menu-open')" aria-label="Toggle menu">☰</button>
 
-    <div>
-        <a href="dashboard.html" data-i18n="nav.dashboard">Home</a>
-        <a href="history.html" data-i18n="nav.myResults">My Results</a>
-        <a href="leaderboard.html" data-i18n="nav.leaderboard">
-            Leaderboard
-        </a>
-        <a href="profile.html" data-i18n="nav.profile">Profile</a>
-        <select id="langSwitcher" class="lang-switcher" style="margin-left:8px;">
-            <option value="en">English</option>
-            <option value="ml">മലയാളം</option>
-        </select>
-        <a href="#" onclick="logout()" data-i18n="nav.logout">Logout</a>
+   <div class="navbar-right">
+
+    <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="history.html">My Results</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="profile.html">Profile</a>
     </div>
+
+    <div class="language-box">
+        <select id="langSwitcher">
+            ...
+        </select>
+    </div>
+
+    <a href="#" class="logout-btn" onclick="logout()">
+        Logout
+    </a>
+
+  </div>
 </nav>
 
 <div class="container">
