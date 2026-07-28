@@ -1,3 +1,18 @@
+function t(key, fallback) {
+
+    const lang =
+        (typeof getCurrentLang === "function")
+            ? getCurrentLang()
+            : "en";
+
+    return (
+        typeof TRANSLATIONS !== "undefined" &&
+        TRANSLATIONS[lang] &&
+        TRANSLATIONS[lang][key]
+    ) || fallback;
+
+}
+
 loadLeaderboard();
 
 async function loadLeaderboard() {
@@ -29,11 +44,11 @@ async function loadLeaderboard() {
 
                     html += `
                     <tr>
-                        <td data-label="Rank">${index + 1}</td>
-                        <td data-label="Name">${user.name}</td>
-                        <td data-label="Email">${user.email}</td>
-                        <td data-label="Score">${user.score}</td>
-                        <td data-label="Percentage">${user.percentage}%</td>
+                        <td data-label="${t('leaderboard.colRank','Rank')}">${index + 1}</td>
+                        <td data-label="${t('leaderboard.colName','Name')}">${user.name}</td>
+                        <td data-label="${t('leaderboard.colEmail','Email')}">${user.email}</td>
+                        <td data-label="${t('leaderboard.colScore','Score')}">${user.score}</td>
+                        <td data-label="${t('leaderboard.colPercentage','Percentage')}">${user.percentage}%</td>
                     </tr>
                     `;
                 }
@@ -44,7 +59,7 @@ async function loadLeaderboard() {
             html = `
             <tr>
                 <td colspan="5" class="no-data">
-                    No leaderboard data found
+                    ${t('leaderboard.noData', 'No leaderboard data found')}
                 </td>
             </tr>
             `;
@@ -68,7 +83,7 @@ async function loadLeaderboard() {
         .innerHTML = `
         <tr>
             <td colspan="5" class="no-data">
-                Failed to load leaderboard
+                ${t('leaderboard.failedLoad', 'Failed to load leaderboard')}
             </td>
         </tr>
         `;

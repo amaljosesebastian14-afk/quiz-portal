@@ -1,3 +1,18 @@
+function t(key, fallback) {
+
+    const lang =
+        (typeof getCurrentLang === "function")
+            ? getCurrentLang()
+            : "en";
+
+    return (
+        typeof TRANSLATIONS !== "undefined" &&
+        TRANSLATIONS[lang] &&
+        TRANSLATIONS[lang][key]
+    ) || fallback;
+
+}
+
 const result = JSON.parse(
     localStorage.getItem("result")
 );
@@ -27,17 +42,17 @@ else {
 
     if(result.percentage >= 80){
 
-        performance = "🏆 Excellent Performance";
+        performance = t("result.excellent", "🏆 Excellent Performance");
 
     }
     else if(result.percentage >= 60){
 
-        performance = "✅ Good Performance";
+        performance = t("result.good", "✅ Good Performance");
 
     }
     else{
 
-        performance = "📚 Keep Practicing";
+        performance = t("result.keepPracticing", "📚 Keep Practicing");
 
     }
 

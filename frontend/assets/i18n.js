@@ -59,7 +59,56 @@ const TRANSLATIONS = {
 
         // Dashboard
         "dashboard.heading": "📚 Available Exams",
-        "dashboard.welcome": "Welcome back! Select an exam to begin."
+        "dashboard.welcome": "Welcome back! Select an exam to begin.",
+
+        // History page
+        "history.heading": "📊 My Exam History",
+        "history.subtitle": "View all your exam attempts and scores.",
+        "history.colExam": "Exam Name",
+        "history.colScore": "Score",
+        "history.colPercentage": "Percentage",
+        "history.colDate": "Date",
+        "history.noData": "No Exam History Found",
+        "history.failedLoad": "Failed to load history",
+
+        // Leaderboard page
+        "leaderboard.heading": "🏆 Leaderboard",
+        "leaderboard.subtitle": "Top performers for this exam.......",
+        "leaderboard.colRank": "Rank",
+        "leaderboard.colName": "Name",
+        "leaderboard.colEmail": "Email",
+        "leaderboard.colScore": "Score",
+        "leaderboard.colPercentage": "Percentage",
+        "leaderboard.noData": "No leaderboard data found",
+        "leaderboard.failedLoad": "Failed to load leaderboard",
+
+        // Profile page
+        "profile.heading": "My Profile",
+        "profile.name": "Name",
+        "profile.attempts": "Exams Attempted",
+        "profile.highestScore": "Highest Score",
+        "profile.avgScore": "Average Score",
+        "profile.examHistory": "📊 Exam History",
+        "profile.leaderboardBtn": "🏆 Leaderboard",
+        "profile.takeExam": "📝 Take Exam",
+
+        // Result page
+        "result.heading": "🎉 Exam Completed",
+        "result.subtitle": "Your assessment has been submitted successfully.",
+        "result.score": "Score",
+        "result.percentage": "Percentage",
+        "result.leaderboardBtn": "🏆 Leaderboard",
+        "result.myResultsBtn": "📊 My Results",
+        "result.dashboardBtn": "📚 Dashboard",
+        "result.aiExplanationHeading": "🤖 AI Explanation",
+        "result.excellent": "🏆 Excellent Performance",
+        "result.good": "✅ Good Performance",
+        "result.keepPracticing": "📚 Keep Practicing",
+
+        // Exam page
+        "exam.title": "Online Examination",
+        "exam.subtitle": "Answer all questions before time expires",
+        "exam.submitBtn": "🚀 Submit Exam"
 
     },
 
@@ -112,7 +161,56 @@ const TRANSLATIONS = {
 
         // Dashboard
         "dashboard.heading": "📚 ലഭ്യമായ പരീക്ഷകൾ",
-        "dashboard.welcome": "തിരികെ സ്വാഗതം! ആരംഭിക്കാൻ ഒരു പരീക്ഷ തിരഞ്ഞെടുക്കുക."
+        "dashboard.welcome": "തിരികെ സ്വാഗതം! ആരംഭിക്കാൻ ഒരു പരീക്ഷ തിരഞ്ഞെടുക്കുക.",
+
+        // History page
+        "history.heading": "📊 എന്റെ പരീക്ഷാ ചരിത്രം",
+        "history.subtitle": "നിങ്ങളുടെ എല്ലാ പരീക്ഷാ ശ്രമങ്ങളും സ്കോറുകളും കാണുക.",
+        "history.colExam": "പരീക്ഷയുടെ പേര്",
+        "history.colScore": "സ്കോർ",
+        "history.colPercentage": "ശതമാനം",
+        "history.colDate": "തീയതി",
+        "history.noData": "പരീക്ഷാ ചരിത്രം കണ്ടെത്തിയില്ല",
+        "history.failedLoad": "ചരിത്രം ലോഡ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു",
+
+        // Leaderboard page
+        "leaderboard.heading": "🏆 ലീഡർബോർഡ്",
+        "leaderboard.subtitle": "ഈ പരീക്ഷയിലെ മികച്ച പ്രകടനക്കാർ.......",
+        "leaderboard.colRank": "റാങ്ക്",
+        "leaderboard.colName": "പേര്",
+        "leaderboard.colEmail": "ഇമെയിൽ",
+        "leaderboard.colScore": "സ്കോർ",
+        "leaderboard.colPercentage": "ശതമാനം",
+        "leaderboard.noData": "ലീഡർബോർഡ് ഡാറ്റ കണ്ടെത്തിയില്ല",
+        "leaderboard.failedLoad": "ലീഡർബോർഡ് ലോഡ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു",
+
+        // Profile page
+        "profile.heading": "എന്റെ പ്രൊഫൈൽ",
+        "profile.name": "പേര്",
+        "profile.attempts": "എഴുതിയ പരീക്ഷകൾ",
+        "profile.highestScore": "ഏറ്റവും ഉയർന്ന സ്കോർ",
+        "profile.avgScore": "ശരാശരി സ്കോർ",
+        "profile.examHistory": "📊 പരീക്ഷാ ചരിത്രം",
+        "profile.leaderboardBtn": "🏆 ലീഡർബോർഡ്",
+        "profile.takeExam": "📝 പരീക്ഷ എഴുതുക",
+
+        // Result page
+        "result.heading": "🎉 പരീക്ഷ പൂർത്തിയായി",
+        "result.subtitle": "നിങ്ങളുടെ അസസ്‌മെന്റ് വിജയകരമായി സമർപ്പിച്ചു.",
+        "result.score": "സ്കോർ",
+        "result.percentage": "ശതമാനം",
+        "result.leaderboardBtn": "🏆 ലീഡർബോർഡ്",
+        "result.myResultsBtn": "📊 എന്റെ ഫലങ്ങൾ",
+        "result.dashboardBtn": "📚 ഡാഷ്ബോർഡ്",
+        "result.aiExplanationHeading": "🤖 AI വിശദീകരണം",
+        "result.excellent": "🏆 മികച്ച പ്രകടനം",
+        "result.good": "✅ നല്ല പ്രകടനം",
+        "result.keepPracticing": "📚 തുടർന്നും പരിശീലിക്കുക",
+
+        // Exam page
+        "exam.title": "ഓൺലൈൻ പരീക്ഷ",
+        "exam.subtitle": "സമയം തീരുന്നതിന് മുമ്പ് എല്ലാ ചോദ്യങ്ങൾക്കും ഉത്തരം നൽകുക",
+        "exam.submitBtn": "🚀 പരീക്ഷ സമർപ്പിക്കുക"
 
     }
 

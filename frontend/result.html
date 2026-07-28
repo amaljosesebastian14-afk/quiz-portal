@@ -31,17 +31,22 @@
 
     <div>
 
-        <a href="dashboard.html">
+        <a href="dashboard.html" data-i18n="nav.dashboard">
             Dashboard
         </a>
 
-        <a href="history.html">
+        <a href="history.html" data-i18n="nav.myResults">
             My Results
         </a>
 
-        <a href="leaderboard.html">
+        <a href="leaderboard.html" data-i18n="nav.leaderboard">
             Leaderboard
         </a>
+
+        <select id="langSwitcher" class="lang-switcher">
+            <option value="en">English</option>
+            <option value="ml">മലയാളം</option>
+        </select>
 
     </div>
 
@@ -51,17 +56,17 @@
 
     <div class="card result-card">
 
-        <h1>
+        <h1 data-i18n="result.heading">
             🎉 Exam Completed
         </h1>
 
-        <p class="welcome">
+        <p class="welcome" data-i18n="result.subtitle">
             Your assessment has been submitted successfully.
         </p>
 
         <div class="result-box">
 
-            <h2>
+            <h2 data-i18n="result.score">
                 Score
             </h2>
 
@@ -73,7 +78,7 @@
 
         <div class="result-box">
 
-            <h2>
+            <h2 data-i18n="result.percentage">
                 Percentage
             </h2>
 
@@ -91,7 +96,7 @@
             id="aiSection"
             style="display:none; margin-top:30px; text-align:left;">
 
-            <h2>
+            <h2 data-i18n="result.aiExplanationHeading">
                 🤖 AI Explanation
             </h2>
 
@@ -101,15 +106,15 @@
 
         <div class="action-buttons">
 
-            <button onclick="goLeaderboard()">
+            <button onclick="goLeaderboard()" data-i18n="result.leaderboardBtn">
                 🏆 Leaderboard
             </button>
 
-            <button onclick="goHistory()">
+            <button onclick="goHistory()" data-i18n="result.myResultsBtn">
                 📊 My Results
             </button>
 
-            <button onclick="goDashboard()">
+            <button onclick="goDashboard()" data-i18n="result.dashboardBtn">
                 📚 Dashboard
             </button>
 
@@ -119,6 +124,7 @@
 
 </div>
 
+<script src="assets/i18n.js"></script>
 <script src="js/result.js"></script>
 
 </body>

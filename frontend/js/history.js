@@ -19,6 +19,21 @@ else {
 
 }
 
+function t(key, fallback) {
+
+    const lang =
+        (typeof getCurrentLang === "function")
+            ? getCurrentLang()
+            : "en";
+
+    return (
+        typeof TRANSLATIONS !== "undefined" &&
+        TRANSLATIONS[lang] &&
+        TRANSLATIONS[lang][key]
+    ) || fallback;
+
+}
+
 async function loadHistory() {
 
     try {
@@ -41,7 +56,7 @@ async function loadHistory() {
             html = `
             <tr>
                 <td colspan="4" class="no-data">
-                    No Exam History Found
+                    ${t("history.noData", "No Exam History Found")}
                 </td>
             </tr>
             `;
@@ -54,21 +69,21 @@ async function loadHistory() {
 
                 <tr>
 
-                    <td data-label="Exam Name">
+                    <td data-label="${t('history.colExam','Exam Name')}">
                         ${result.examTitle || "-"}
                     </td>
 
-                    <td data-label="Score">
+                    <td data-label="${t('history.colScore','Score')}">
                         ${result.score || 0}
                         /
                         ${result.totalQuestions || 0}
                     </td>
 
-                    <td data-label="Percentage">
+                    <td data-label="${t('history.colPercentage','Percentage')}">
                         ${result.percentage || 0}%
                     </td>
 
-                    <td data-label="Date">
+                    <td data-label="${t('history.colDate','Date')}">
                         ${
                             result.submittedAt
                             ? new Date(
@@ -105,7 +120,7 @@ async function loadHistory() {
         .innerHTML = `
         <tr>
             <td colspan="4" class="no-data">
-                Failed to load history
+                ${t("history.failedLoad", "Failed to load history")}
             </td>
         </tr>
         `;

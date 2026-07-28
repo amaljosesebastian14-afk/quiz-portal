@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <title>My Profile</title>
 
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 
@@ -19,19 +19,24 @@
 
         <div>
 
-            <a href="dashboard.html">
+            <a href="dashboard.html" data-i18n="nav.dashboard">
                 Dashboard
             </a>
 
-            <a href="history.html">
+            <a href="history.html" data-i18n="nav.history">
                 History
             </a>
 
-            <a href="leaderboard.html">
+            <a href="leaderboard.html" data-i18n="nav.leaderboard">
                 Leaderboard
             </a>
 
-            <a href="#" onclick="logout()">
+            <select id="langSwitcher" class="lang-switcher">
+                <option value="en">English</option>
+                <option value="ml">മലയാളം</option>
+            </select>
+
+            <a href="#" onclick="logout()" data-i18n="nav.logout">
                 Logout
             </a>
 
@@ -49,7 +54,7 @@
                     👤
                 </div>
 
-                <h1>
+                <h1 data-i18n="profile.heading">
                     My Profile
                 </h1>
 
@@ -67,7 +72,7 @@
                         -
                     </h2>
 
-                    <p>
+                    <p data-i18n="profile.name">
                         Name
                     </p>
 
@@ -79,7 +84,7 @@
                         0
                     </h2>
 
-                    <p>
+                    <p data-i18n="profile.attempts">
                         Exams Attempted
                     </p>
 
@@ -91,7 +96,7 @@
                         0
                     </h2>
 
-                    <p>
+                    <p data-i18n="profile.highestScore">
                         Highest Score
                     </p>
 
@@ -103,7 +108,7 @@
                         0%
                     </h2>
 
-                    <p>
+                    <p data-i18n="profile.avgScore">
                         Average Score
                     </p>
 
@@ -114,19 +119,19 @@
             <div class="action-buttons">
 
                 <a href="history.html">
-                    <button class="btn-primary">
+                    <button class="btn-primary" data-i18n="profile.examHistory">
                         📊 Exam History
                     </button>
                 </a>
 
                 <a href="leaderboard.html">
-                    <button class="btn-success">
+                    <button class="btn-success" data-i18n="profile.leaderboardBtn">
                         🏆 Leaderboard
                     </button>
                 </a>
 
                 <a href="dashboard.html">
-                    <button>
+                    <button data-i18n="profile.takeExam">
                         📝 Take Exam
                     </button>
                 </a>
@@ -137,6 +142,7 @@
 
     </div>
 
+    <script src="assets/i18n.js"></script>
     <script src="js/profile.js"></script>
 
     <script>

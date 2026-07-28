@@ -26,17 +26,22 @@
 
         <div>
 
-            <a href="dashboard.html">
+            <a href="dashboard.html" data-i18n="nav.dashboard">
                 Dashboard
             </a>
 
-            <a href="history.html">
+            <a href="history.html" data-i18n="nav.myResults">
                 My Results
             </a>
 
-            <a href="profile.html">
+            <a href="profile.html" data-i18n="nav.profile">
                 Profile
             </a>
+
+            <select id="langSwitcher" class="lang-switcher">
+                <option value="en">English</option>
+                <option value="ml">മലയാളം</option>
+            </select>
 
         </div>
 
@@ -44,11 +49,11 @@
 
     <div class="container">
 
-        <h1>
+        <h1 data-i18n="leaderboard.heading">
             🏆 Leaderboard
         </h1>
 
-        <p class="welcome">
+        <p class="welcome" data-i18n="leaderboard.subtitle">
             Top performers for this exam.......
         </p>
 
@@ -62,23 +67,23 @@
 
                         <tr>
 
-                            <th>
+                            <th data-i18n="leaderboard.colRank">
                                 Rank
                             </th>
 
-                            <th>
+                            <th data-i18n="leaderboard.colName">
                                 Name
                             </th>
 
-                            <th>
+                            <th data-i18n="leaderboard.colEmail">
                                 Email
                             </th>
 
-                            <th>
+                            <th data-i18n="leaderboard.colScore">
                                 Score
                             </th>
 
-                            <th>
+                            <th data-i18n="leaderboard.colPercentage">
                                 Percentage
                             </th>
 
@@ -98,6 +103,7 @@
 
     </div>
 
+    <script src="assets/i18n.js"></script>
     <script src="js/leaderboard.js"></script>
 
 </body>

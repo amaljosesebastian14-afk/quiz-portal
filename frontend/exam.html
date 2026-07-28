@@ -19,8 +19,12 @@
     <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('menu-open')" aria-label="Toggle menu">☰</button>
 
     <div>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="history.html">Results</a>
+        <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+        <a href="history.html" data-i18n="nav.myResults">Results</a>
+        <select id="langSwitcher" class="lang-switcher">
+            <option value="en">English</option>
+            <option value="ml">മലയാളം</option>
+        </select>
     </div>
 
 </nav>
@@ -30,8 +34,8 @@
     <div class="exam-header">
 
         <div class="exam-title">
-            <h1>Online Examination</h1>
-            <p>Answer all questions before time expires</p>
+            <h1 data-i18n="exam.title">Online Examination</h1>
+            <p data-i18n="exam.subtitle">Answer all questions before time expires</p>
         </div>
 
         <div class="timer-box">
@@ -51,7 +55,8 @@
         <button
             type="button"
             class="submit-btn"
-            onclick="submitExam()">
+            onclick="submitExam()"
+            data-i18n="exam.submitBtn">
 
             🚀 Submit Exam
 
@@ -61,6 +66,7 @@
 
 </div>
 
+<script src="assets/i18n.js"></script>
 <script src="js/exam.js"></script>
 
 </body>
