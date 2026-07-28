@@ -1118,7 +1118,8 @@ AUTH PAGES (login/signup)
     align-items:center;
     padding:24px;
     position:relative;
-    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:auto;
     background:
         radial-gradient(circle at 1px 1px, #1D2154 1px, transparent 0) 0 0/28px 28px,
         var(--bg);
