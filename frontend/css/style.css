@@ -120,6 +120,8 @@ LANGUAGE SWITCHER
     font-size:13px;
     font-family:var(--font-body);
     cursor:pointer;
+    width:auto;
+    flex-shrink:0;
 }
 
 .lang-switcher:focus{
