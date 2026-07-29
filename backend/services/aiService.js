@@ -220,15 +220,11 @@ ${q.userAnswer}
 }
 
 /*
-Batch-translate quiz questions + their options into the target language.
-Input: [{ questionId, question, options: [...] }, ...]
-Output: [{ questionId, question, options: [...] }, ...] translated
+Translate a single small batch (max ~5 questions) in one Groq call.
+Keeping batches small avoids hitting the output token limit, which
+was previously truncating responses and breaking JSON parsing.
 */
-async function translateQuestions(questions, lang) {
-
-    if (!questions.length) {
-        return [];
-    }
+async function translateQuestionBatch(questions, lang) {
 
     const targetLanguage = languageName(lang);
 
@@ -239,17 +235,22 @@ exactly the same - this is a direct translation, not a rewrite.
 Do not translate proper nouns, brand names, or numbers unless they
 have a standard translated form.
 
-Return ONLY a JSON array, one object per question, in the SAME ORDER
-as given, with this exact shape:
+CRITICAL RULES:
+1. Return ONLY a JSON array, one object per question, in the SAME ORDER as given.
+2. The JSON KEYS must stay EXACTLY "question" and "options" IN ENGLISH -
+   do NOT translate the keys, only translate the text VALUES.
+3. Do not add any extra keys, comments, or text outside the JSON array.
+
+Exact shape required (keys must match this precisely):
 
 [
   {
-    "question": "...",
-    "options": ["...", "...", "...", "..."]
+    "question": "<translated question text here>",
+    "options": ["<translated option 1>", "<translated option 2>", "<translated option 3>", "<translated option 4>"]
   }
 ]
 
-Questions:
+Questions to translate:
 
 `;
 
@@ -266,70 +267,104 @@ ${q.options.join("\n")}
 
     });
 
+    const response =
+        await groq.chat.completions.create({
+
+            model: "llama-3.1-8b-instant",
+
+            messages: [
+
+                {
+                    role: "system",
+                    content:
+                        `You are a precise translator. Always return valid JSON only, with keys exactly "question" and "options" in English, and values in ${targetLanguage}.`
+                },
+
+                {
+                    role: "user",
+                    content: prompt
+                }
+
+            ],
+
+            temperature: 0.1,
+
+            max_completion_tokens: 2000
+
+        });
+
+    const content =
+        response.choices[0].message.content;
+
+    let translated;
+
     try {
 
-        const response =
-            await groq.chat.completions.create({
+        translated = JSON.parse(extractJSON(content));
 
-                model: "llama-3.1-8b-instant",
+    }
+    catch (parseError) {
 
-                messages: [
+        console.error(
+            "TRANSLATION JSON PARSE ERROR. Raw content was:",
+            content
+        );
 
-                    {
-                        role: "system",
-                        content:
-                            `You are a precise translator. Always return valid JSON only, fully in ${targetLanguage}.`
-                    },
+        throw new Error(
+            "Translation returned an unexpected format."
+        );
 
-                    {
-                        role: "user",
-                        content: prompt
-                    }
+    }
 
-                ],
+    return questions.map((q, index) => ({
 
-                temperature: 0.1,
+        questionId: q.questionId,
 
-                max_completion_tokens: 2000
+        question:
+            translated[index]?.question || q.question,
 
-            });
+        options:
+            translated[index]?.options || q.options
 
-        const content =
-            response.choices[0].message.content;
+    }));
 
-        let translated;
+}
 
-        try {
+/*
+Batch-translate quiz questions + their options into the target language.
+Splits into small chunks (max 5 questions per Groq call) so responses
+never get long enough to hit the output token limit and truncate.
+Input: [{ questionId, question, options: [...] }, ...]
+Output: [{ questionId, question, options: [...] }, ...] translated
+*/
+async function translateQuestions(questions, lang) {
 
-            translated = JSON.parse(extractJSON(content));
+    if (!questions.length) {
+        return [];
+    }
+
+    const CHUNK_SIZE = 5;
+
+    const chunks = [];
+
+    for (let i = 0; i < questions.length; i += CHUNK_SIZE) {
+        chunks.push(questions.slice(i, i + CHUNK_SIZE));
+    }
+
+    try {
+
+        const results = [];
+
+        for (const chunk of chunks) {
+
+            const translatedChunk =
+                await translateQuestionBatch(chunk, lang);
+
+            results.push(...translatedChunk);
 
         }
-        catch (parseError) {
 
-            console.error(
-                "TRANSLATION JSON PARSE ERROR. Raw content was:",
-                content
-            );
-
-            throw new Error(
-                "Translation returned an unexpected format."
-            );
-
-        }
-
-        // re-attach questionId (the AI doesn't need to see/return it,
-        // this keeps translated content correctly matched to originals)
-        return questions.map((q, index) => ({
-
-            questionId: q.questionId,
-
-            question:
-                translated[index]?.question || q.question,
-
-            options:
-                translated[index]?.options || q.options
-
-        }));
+        return results;
 
     }
     catch (error) {
