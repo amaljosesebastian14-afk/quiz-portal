@@ -21,13 +21,18 @@ try {
         ? getCurrentLang()
         : "en";
 
+    const url =
+    `https://quiz-portal-1lia.onrender.com/api/exam/start/${examId}?userId=${user._id}&lang=${lang}`;
+
+    console.log("DEBUG - Fetch URL:", url);
+
     const response =
-    await fetch(
-        `https://quiz-portal-1lia.onrender.com/api/exam/start/${examId}?userId=${user._id}&lang=${lang}`
-    );
+    await fetch(url);
 
     const data =
     await response.json();
+
+    console.log("DEBUG - First question received:", data.questions ? data.questions[0] : data);
 
     if (!data.success) {
 
