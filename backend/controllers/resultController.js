@@ -4,10 +4,12 @@ const { explainWrongAnswers } = require("../services/aiService");
 
 /*
 Fetch cached explanations where available, and only call the AI
-for wrong-answer combinations that have never been explained before.
-Cache key = questionId + selectedAnswer (the specific wrong option chosen).
+for wrong-answer combinations that have never been explained before
+IN THIS LANGUAGE. Cache key = questionId + selectedAnswer + lang,
+since the same wrong answer needs a separate cached explanation
+per language.
 */
-async function getExplanationsWithCache(db, wrongAnswers) {
+async function getExplanationsWithCache(db, wrongAnswers, lang) {
 
     const cacheCollection =
         db.collection("aiExplanations");
@@ -18,13 +20,14 @@ async function getExplanationsWithCache(db, wrongAnswers) {
 
     /*
     1. Look up existing cached explanations for every
-    (questionId, selectedAnswer) pair in this submission
+    (questionId, selectedAnswer, lang) combination in this submission
     */
     const cachedDocs =
         await cacheCollection.find({
             $or: wrongAnswers.map(wa => ({
                 questionId: wa.questionId,
-                selectedAnswer: wa.selectedAnswer
+                selectedAnswer: wa.selectedAnswer,
+                lang
             }))
         }).toArray();
 
@@ -33,7 +36,7 @@ async function getExplanationsWithCache(db, wrongAnswers) {
     cachedDocs.forEach(doc => {
 
         cacheMap.set(
-            `${doc.questionId}|${doc.selectedAnswer}`,
+            `${doc.questionId}|${doc.selectedAnswer}|${doc.lang}`,
             doc
         );
 
@@ -41,22 +44,23 @@ async function getExplanationsWithCache(db, wrongAnswers) {
 
     /*
     2. Figure out which wrong answers still need
-    a fresh AI explanation
+    a fresh AI explanation in this language
     */
     const uncached =
         wrongAnswers.filter(wa =>
             !cacheMap.has(
-                `${wa.questionId}|${wa.selectedAnswer}`
+                `${wa.questionId}|${wa.selectedAnswer}|${lang}`
             )
         );
 
     /*
-    3. Call the AI only for the uncached ones, in a single batched call
+    3. Call the AI only for the uncached ones, in a single batched call,
+    asking it to write the explanation directly in the target language
     */
     if (uncached.length > 0) {
 
         const freshExplanations =
-            await explainWrongAnswers(uncached);
+            await explainWrongAnswers(uncached, lang);
 
         const docsToCache =
             uncached.map((wa, i) => ({
@@ -64,6 +68,8 @@ async function getExplanationsWithCache(db, wrongAnswers) {
                 questionId: wa.questionId,
 
                 selectedAnswer: wa.selectedAnswer,
+
+                lang,
 
                 question: wa.question,
 
@@ -90,7 +96,7 @@ async function getExplanationsWithCache(db, wrongAnswers) {
         the same never-seen-before wrong answer at the same time,
         the second write just no-ops instead of erroring/duplicating.
         (Recommended: create a unique index once on
-        { questionId: 1, selectedAnswer: 1 } in this collection.)
+        { questionId: 1, selectedAnswer: 1, lang: 1 } in this collection.)
         */
         await Promise.all(
 
@@ -100,7 +106,8 @@ async function getExplanationsWithCache(db, wrongAnswers) {
 
                     {
                         questionId: doc.questionId,
-                        selectedAnswer: doc.selectedAnswer
+                        selectedAnswer: doc.selectedAnswer,
+                        lang: doc.lang
                     },
 
                     {
@@ -120,7 +127,7 @@ async function getExplanationsWithCache(db, wrongAnswers) {
         docsToCache.forEach(doc => {
 
             cacheMap.set(
-                `${doc.questionId}|${doc.selectedAnswer}`,
+                `${doc.questionId}|${doc.selectedAnswer}|${doc.lang}`,
                 doc
             );
 
@@ -136,7 +143,7 @@ async function getExplanationsWithCache(db, wrongAnswers) {
 
         const doc =
             cacheMap.get(
-                `${wa.questionId}|${wa.selectedAnswer}`
+                `${wa.questionId}|${wa.selectedAnswer}|${lang}`
             );
 
         return {
@@ -171,8 +178,11 @@ const submitExam = async (req, res) => {
         const {
             examId,
             userId,
-            answers
+            answers,
+            lang
         } = req.body;
+
+        const explanationLang = (lang === "ml") ? "ml" : "en";
 
         let score = 0;
 
@@ -244,7 +254,8 @@ const submitExam = async (req, res) => {
                 explanations =
                     await getExplanationsWithCache(
                         db,
-                        wrongAnswers
+                        wrongAnswers,
+                        explanationLang
                     );
 
             }

@@ -16,9 +16,14 @@ try {
         localStorage.getItem("user")
     );
 
+    const lang =
+    (typeof getCurrentLang === "function")
+        ? getCurrentLang()
+        : "en";
+
     const response =
     await fetch(
-        `https://quiz-portal-1lia.onrender.com/api/exam/start/${examId}?userId=${user._id}`
+        `https://quiz-portal-1lia.onrender.com/api/exam/start/${examId}?userId=${user._id}&lang=${lang}`
     );
 
     const data =
@@ -222,6 +227,11 @@ JSON.parse(
     localStorage.getItem("user")
 );
 
+const lang =
+(typeof getCurrentLang === "function")
+    ? getCurrentLang()
+    : "en";
+
 const answers = [];
 
 questions.forEach(q=>{
@@ -268,7 +278,9 @@ try{
 
                 userId:user._id,
 
-                answers
+                answers,
+
+                lang
 
             })
 
