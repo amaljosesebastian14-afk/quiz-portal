@@ -85,15 +85,12 @@ Keep the explanation under 100 words.
 }
 
 /*
-Batch explanation for all wrong answers on exam submission
-(single API call instead of one per question, avoids rate-limit issues)
-lang: "en" or "ml" - the language the explanation itself should be written in
+Explain a single small batch (max ~3 wrong answers) in one Groq call.
+Keeping batches small avoids hitting the output token limit, which
+was truncating responses (especially in Malayalam, which uses more
+tokens per word than English) and breaking JSON parsing.
 */
-async function explainWrongAnswers(wrongQuestions, lang = "en") {
-
-    if (!wrongQuestions.length) {
-        return [];
-    }
+async function explainWrongAnswersBatch(wrongQuestions, lang) {
 
     const targetLanguage = languageName(lang);
 
@@ -111,22 +108,25 @@ For EACH question, provide:
 5. One simple example
 6. One learning tip
 
-IMPORTANT: Write the "explanation", "example", and "tip" fields
-entirely in ${targetLanguage}. Keep "question", "correctAnswer",
-and "userAnswer" exactly as given (do not translate those).
+CRITICAL RULES:
+1. Return ONLY a JSON array, one object per question, in the SAME ORDER as given.
+2. The JSON KEYS must stay EXACTLY "question", "correctAnswer", "userAnswer",
+   "explanation", "example", "tip" - ALL IN ENGLISH. Do NOT translate the keys.
+3. Only the VALUES of "explanation", "example", and "tip" should be written
+   in ${targetLanguage}. Keep "question", "correctAnswer", and "userAnswer"
+   values exactly as given below (do not translate or alter those values).
+4. Do not add any extra keys, comments, or text outside the JSON array.
 
-Return ONLY a JSON array.
-
-Example format:
+Exact shape required (keys must match this precisely):
 
 [
   {
     "question":"...",
     "correctAnswer":"...",
     "userAnswer":"...",
-    "explanation":"...",
-    "example":"...",
-    "tip":"..."
+    "explanation":"<in ${targetLanguage}>",
+    "example":"<in ${targetLanguage}>",
+    "tip":"<in ${targetLanguage}>"
   }
 ]
 
@@ -155,54 +155,91 @@ ${q.userAnswer}
 
     });
 
+    const response =
+        await groq.chat.completions.create({
+
+            model: "llama-3.1-8b-instant",
+
+            messages: [
+
+                {
+                    role: "system",
+                    content:
+                        `You are a friendly programming tutor. Always return valid JSON only, with keys exactly "question", "correctAnswer", "userAnswer", "explanation", "example", "tip" in English. Write the explanation/example/tip VALUES in ${targetLanguage}.`
+                },
+
+                {
+                    role: "user",
+                    content: prompt
+                }
+
+            ],
+
+            temperature: 0.2,
+
+            max_completion_tokens: 1500
+
+        });
+
+    const content =
+        response.choices[0].message.content;
+
     try {
 
-        const response =
-            await groq.chat.completions.create({
+        return JSON.parse(extractJSON(content));
 
-                model: "llama-3.1-8b-instant",
+    }
+    catch (parseError) {
 
-                messages: [
+        console.error(
+            "AI JSON PARSE ERROR. Raw content was:",
+            content
+        );
 
-                    {
-                        role: "system",
-                        content:
-                            `You are a friendly programming tutor. Always return valid JSON only. Write explanations in ${targetLanguage}.`
-                    },
+        throw new Error(
+            "AI returned an unexpected format. Please try again."
+        );
 
-                    {
-                        role: "user",
-                        content: prompt
-                    }
+    }
 
-                ],
+}
 
-                temperature: 0.2,
+/*
+Batch explanation for all wrong answers on exam submission.
+Splits into small chunks (max 3 wrong answers per Groq call) so
+responses never get long enough to hit the output token limit
+and truncate - this matters more in Malayalam, which needs
+noticeably more tokens per word than English.
+lang: "en" or "ml" - the language the explanation itself should be written in
+*/
+async function explainWrongAnswers(wrongQuestions, lang = "en") {
 
-                max_completion_tokens: 1500
+    if (!wrongQuestions.length) {
+        return [];
+    }
 
-            });
+    const CHUNK_SIZE = 3;
 
-        const content =
-            response.choices[0].message.content;
+    const chunks = [];
 
-        try {
+    for (let i = 0; i < wrongQuestions.length; i += CHUNK_SIZE) {
+        chunks.push(wrongQuestions.slice(i, i + CHUNK_SIZE));
+    }
 
-            return JSON.parse(extractJSON(content));
+    try {
+
+        const results = [];
+
+        for (const chunk of chunks) {
+
+            const explainedChunk =
+                await explainWrongAnswersBatch(chunk, lang);
+
+            results.push(...explainedChunk);
 
         }
-        catch (parseError) {
 
-            console.error(
-                "AI JSON PARSE ERROR. Raw content was:",
-                content
-            );
-
-            throw new Error(
-                "AI returned an unexpected format. Please try again."
-            );
-
-        }
+        return results;
 
     }
     catch (error) {
