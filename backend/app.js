@@ -2,9 +2,12 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const http = require("http");
+const { Server } = require("socket.io");
 
 const { connectDB } = require("./config/db");
 const { connectRedis } = require("./config/redis");
+const { initMultiplayer } = require("./sockets/multiplayerSocket");
 
 const testRoutes = require("./routes/testRoutes");
 const authRoutes = require("./routes/authRoutes");
@@ -36,6 +39,19 @@ app.get("/", (req, res) => {
     });
 });
 
+/*
+Wrap the Express app with a raw HTTP server so Socket.IO can attach
+to the SAME server (and therefore the same port) instead of needing
+a separate one. This does not change how any existing REST route works.
+*/
+const server = http.createServer(app);
+
+const io = new Server(server, {
+    cors: {
+        origin: "*"
+    }
+});
+
 async function startServer() {
     try {
 
@@ -43,9 +59,11 @@ async function startServer() {
 
         //await connectRedis();
 
+        initMultiplayer(io);
+
         const PORT = process.env.PORT || 5000;
 
-        app.listen(PORT, () => {
+        server.listen(PORT, () => {
             console.log(`Server Running On Port ${PORT}`);
         });
 

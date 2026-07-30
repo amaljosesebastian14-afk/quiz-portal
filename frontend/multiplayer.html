@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <title>Multiplayer - Trivio</title>
+    <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+
+<nav class="navbar" id="mainNav">
+    <img src="assets/logo.svg" alt="Trivio" class="navbar-logo">
+    <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('menu-open')" aria-label="Toggle menu">☰</button>
+    <div>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="history.html">My Results</a>
+        <a href="leaderboard.html">Leaderboard</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>🎮 Multiplayer</h1>
+    <p class="welcome">Play live quizzes with your friends.</p>
+
+    <!-- STEP 1: Create or Join -->
+    <div id="setupView" class="card form-card">
+
+        <div class="mp-tabs">
+            <div class="mp-tab active" id="tabCreate" onclick="showTab('create')">Create Room</div>
+            <div class="mp-tab" id="tabJoin" onclick="showTab('join')">Join Room</div>
+        </div>
+
+        <div id="createPanel">
+
+            <label>Choose an Exam</label>
+            <select id="examSelect"></select>
+
+            <label>Your Name</label>
+            <input type="text" id="createName" placeholder="Enter your name">
+
+            <button class="btn-full" onclick="createRoom()">
+                🚀 Create Room
+            </button>
+
+        </div>
+
+        <div id="joinPanel" style="display:none;">
+
+            <label>Room Code</label>
+            <input type="text" id="roomCodeInput" placeholder="e.g. ABX921" style="text-transform:uppercase;">
+
+            <label>Your Name</label>
+            <input type="text" id="joinName" placeholder="Enter your name">
+
+            <button class="btn-full" onclick="joinRoom()">
+                🔑 Join Room
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- STEP 2: Lobby -->
+    <div id="lobbyView" class="card" style="display:none;">
+
+        <div class="room-code-display">
+            <div class="code" id="lobbyRoomCode">------</div>
+            <p>Share this code with your friends</p>
+        </div>
+
+        <h2 id="lobbyExamTitle" style="margin-bottom:14px;"></h2>
+
+        <ul class="player-list" id="playerList"></ul>
+
+        <button class="btn-full" id="startGameBtn" style="display:none;" disabled>
+            ⏳ Waiting for more players... (Start button coming in Stage 2)
+        </button>
+
+        <p class="welcome" id="waitingMessage">Waiting for the host to start the game...</p>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+<script src="js/multiplayer.js"></script>
+
+</body>
+</html>
