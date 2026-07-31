@@ -1,6 +1,8 @@
 const SOCKET_URL = "https://quiz-portal-1lia.onrender.com";
 
-const socket = io(SOCKET_URL);
+const socket = io(SOCKET_URL, {
+    timeout: 30000
+});
 
 const user =
 JSON.parse(
@@ -8,6 +10,54 @@ JSON.parse(
 );
 
 let currentRoom = null;
+let actionInProgress = false;
+
+/*
+==========================
+CONNECTION STATUS
+==========================
+*/
+socket.on("connect", () => {
+
+    const statusEl = document.getElementById("connectionStatus");
+
+    if (statusEl) {
+        statusEl.innerText = "✅ Connected";
+        statusEl.style.color = "var(--success)";
+
+        setTimeout(() => {
+            statusEl.style.display = "none";
+        }, 1500);
+    }
+
+});
+
+socket.on("connect_error", (err) => {
+
+    const statusEl = document.getElementById("connectionStatus");
+
+    if (statusEl) {
+        statusEl.style.display = "block";
+        statusEl.innerText =
+            "⚠️ Still connecting... this can take up to a minute the first time (server waking up). Please wait.";
+        statusEl.style.color = "var(--danger)";
+    }
+
+    console.error("Socket connect error:", err);
+
+});
+
+socket.on("disconnect", () => {
+
+    const statusEl = document.getElementById("connectionStatus");
+
+    if (statusEl) {
+        statusEl.style.display = "block";
+        statusEl.innerText = "❌ Disconnected from server. Reconnecting...";
+        statusEl.style.color = "var(--danger)";
+    }
+
+});
 
 /*
 ==========================
@@ -81,7 +131,9 @@ loadExamsForSelect();
 CREATE ROOM
 ==========================
 */
-function createRoom(){
+function createRoom(btn){
+
+    if(actionInProgress) return;
 
     const examId =
     document.getElementById("examSelect").value;
@@ -99,6 +151,23 @@ function createRoom(){
         return;
     }
 
+    actionInProgress = true;
+
+    const originalText = btn.innerText;
+    btn.innerText = "⏳ Creating room...";
+    btn.disabled = true;
+
+    const timeoutId = setTimeout(() => {
+
+        if(actionInProgress){
+            btn.innerText = originalText;
+            btn.disabled = false;
+            actionInProgress = false;
+            alert("Taking longer than expected. The server may still be waking up - please try again.");
+        }
+
+    }, 45000);
+
     socket.emit("create-room", {
 
         examId,
@@ -109,6 +178,18 @@ function createRoom(){
 
     });
 
+    socket.once("room-created", () => {
+        clearTimeout(timeoutId);
+        actionInProgress = false;
+    });
+
+    socket.once("room-error", () => {
+        clearTimeout(timeoutId);
+        actionInProgress = false;
+        btn.innerText = originalText;
+        btn.disabled = false;
+    });
+
 }
 
 /*
@@ -116,7 +197,9 @@ function createRoom(){
 JOIN ROOM
 ==========================
 */
-function joinRoom(){
+function joinRoom(btn){
+
+    if(actionInProgress) return;
 
     const roomCode =
     document.getElementById("roomCodeInput").value.trim().toUpperCase();
@@ -134,6 +217,23 @@ function joinRoom(){
         return;
     }
 
+    actionInProgress = true;
+
+    const originalText = btn.innerText;
+    btn.innerText = "⏳ Joining room...";
+    btn.disabled = true;
+
+    const timeoutId = setTimeout(() => {
+
+        if(actionInProgress){
+            btn.innerText = originalText;
+            btn.disabled = false;
+            actionInProgress = false;
+            alert("Taking longer than expected. The server may still be waking up - please try again.");
+        }
+
+    }, 45000);
+
     socket.emit("join-room", {
 
         roomCode,
@@ -142,6 +242,18 @@ function joinRoom(){
 
         userName
 
+    });
+
+    socket.once("room-joined", () => {
+        clearTimeout(timeoutId);
+        actionInProgress = false;
+    });
+
+    socket.once("room-error", () => {
+        clearTimeout(timeoutId);
+        actionInProgress = false;
+        btn.innerText = originalText;
+        btn.disabled = false;
     });
 
 }

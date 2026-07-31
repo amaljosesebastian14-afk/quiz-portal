@@ -27,6 +27,10 @@
     <!-- STEP 1: Create or Join -->
     <div id="setupView" class="card form-card">
 
+        <p id="connectionStatus" style="text-align:center; color:var(--text-faint); font-size:13px; margin-bottom:16px;">
+            🔄 Connecting to server...
+        </p>
+
         <div class="mp-tabs">
             <div class="mp-tab active" id="tabCreate" onclick="showTab('create')">Create Room</div>
             <div class="mp-tab" id="tabJoin" onclick="showTab('join')">Join Room</div>
@@ -40,7 +44,7 @@
             <label>Your Name</label>
             <input type="text" id="createName" placeholder="Enter your name">
 
-            <button class="btn-full" onclick="createRoom()">
+            <button class="btn-full" onclick="createRoom(this)">
                 🚀 Create Room
             </button>
 
@@ -54,7 +58,7 @@
             <label>Your Name</label>
             <input type="text" id="joinName" placeholder="Enter your name">
 
-            <button class="btn-full" onclick="joinRoom()">
+            <button class="btn-full" onclick="joinRoom(this)">
                 🔑 Join Room
             </button>
 
