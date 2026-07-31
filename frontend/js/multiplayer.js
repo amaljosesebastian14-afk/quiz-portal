@@ -471,7 +471,7 @@ socket.on("new-question", (data) => {
 
     renderOptions(data.options);
 
-    startClientTimer(data.duration);
+    startClientTimer(data.questionEndsAt, data.duration);
 
 });
 
@@ -669,30 +669,23 @@ CLIENT-SIDE TIMER DISPLAY
 so players see a countdown; it can't be exploited to cheat the timing)
 ==========================
 */
-function startClientTimer(durationSeconds){
+function startClientTimer(questionEndsAt, durationSeconds){
 
     stopClientTimer();
-
-    let remaining = durationSeconds;
-
-    document.getElementById("mpTimer").innerText = remaining;
-    document.getElementById("mpProgressBar").style.width = "100%";
 
     const timerBox = document.getElementById("mpTimerBox");
     timerBox.style.background = "";
 
-    clientTimerInterval = setInterval(() => {
+    function tick(){
 
-        remaining--;
+        const remainingMs = questionEndsAt - Date.now();
 
-        if (remaining < 0) {
-            stopClientTimer();
-            return;
-        }
+        const remaining = Math.max(0, Math.ceil(remainingMs / 1000));
 
         document.getElementById("mpTimer").innerText = remaining;
 
-        const percent = (remaining / durationSeconds) * 100;
+        const percent =
+            Math.max(0, Math.min(100, (remainingMs / (durationSeconds * 1000)) * 100));
 
         document.getElementById("mpProgressBar").style.width = percent + "%";
 
@@ -700,7 +693,15 @@ function startClientTimer(durationSeconds){
             timerBox.style.background = "#dc2626";
         }
 
-    }, 1000);
+        if (remainingMs <= 0) {
+            stopClientTimer();
+        }
+
+    }
+
+    tick(); // render immediately - if we arrived late, this shows the CORRECT (already-reduced) time right away
+
+    clientTimerInterval = setInterval(tick, 250);
 
 }
 

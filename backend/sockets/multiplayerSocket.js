@@ -99,6 +99,10 @@ function initMultiplayer(io) {
 
         room.currentAnswers = {};
 
+        const questionEndsAt = Date.now() + QUESTION_DURATION_MS;
+
+        room.questionEndsAt = questionEndsAt;
+
         io.to(room.roomCode).emit("new-question", {
 
             ...meta,
@@ -107,7 +111,9 @@ function initMultiplayer(io) {
 
             options: questionDoc.options,
 
-            duration: QUESTION_DURATION_MS / 1000
+            duration: QUESTION_DURATION_MS / 1000,
+
+            questionEndsAt
 
         });
 
