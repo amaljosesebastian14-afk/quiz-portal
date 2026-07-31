@@ -709,3 +709,18 @@ function stopClientTimer(){
     clearInterval(clientTimerInterval);
 
 }
+
+/*
+==========================
+EXPLICITLY LEAVE THE ROOM BEFORE NAVIGATING AWAY
+(so the server cleans up immediately, instead of waiting for the
+page-unload disconnect to eventually be noticed)
+==========================
+*/
+function leaveAndGoTo(url){
+
+    socket.emit("leave-room");
+
+    window.location.href = url;
+
+}

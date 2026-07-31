@@ -382,11 +382,57 @@ function initMultiplayer(io) {
 
         });
 
-        // Keep the room around briefly in case of late socket events,
-        // then clean it up
+        // Keep the room around briefly as a safety net in case of
+        // late/delayed socket events, then clean it up. Normal cleanup
+        // happens sooner via the disconnect/leave-room handlers below
+        // once players actually navigate away.
         setTimeout(() => {
             rooms.delete(room.roomCode);
-        }, 10 * 60 * 1000);
+        }, 60 * 1000);
+
+    }
+
+    function leaveRoom(socket) {
+
+        const code = socket.data.roomCode;
+
+        if (!code) return;
+
+        const room = rooms.get(code);
+
+        if (!room) return;
+
+        room.players =
+            room.players.filter(p => p.socketId !== socket.id);
+
+        socket.leave(code);
+
+        socket.data.roomCode = null;
+
+        if (
+            room.hostSocketId === socket.id &&
+            room.status === "lobby"
+        ) {
+
+            io.to(code).emit("room-closed", {
+                message: "The host left. Room closed."
+            });
+
+            rooms.delete(code);
+
+            return;
+
+        }
+
+        if (room.players.length === 0) {
+
+            rooms.delete(code);
+
+            return;
+
+        }
+
+        io.to(code).emit("lobby-update", getPublicRoomState(room));
 
     }
 
@@ -649,46 +695,23 @@ function initMultiplayer(io) {
 
         /*
         ==========================
-        LEAVE / DISCONNECT
+        LEAVE ROOM (explicit, e.g. clicking Play Again / Dashboard)
+        ==========================
+        */
+        socket.on("leave-room", () => {
+
+            leaveRoom(socket);
+
+        });
+
+        /*
+        ==========================
+        DISCONNECT (e.g. closed tab, lost connection, page reload)
         ==========================
         */
         socket.on("disconnect", () => {
 
-            const code = socket.data.roomCode;
-
-            if (!code) return;
-
-            const room = rooms.get(code);
-
-            if (!room) return;
-
-            room.players =
-                room.players.filter(p => p.socketId !== socket.id);
-
-            if (
-                room.hostSocketId === socket.id &&
-                room.status === "lobby"
-            ) {
-
-                io.to(code).emit("room-closed", {
-                    message: "The host left. Room closed."
-                });
-
-                rooms.delete(code);
-
-                return;
-
-            }
-
-            if (room.players.length === 0) {
-
-                rooms.delete(code);
-
-                return;
-
-            }
-
-            io.to(code).emit("lobby-update", getPublicRoomState(room));
+            leaveRoom(socket);
 
         });
 
