@@ -724,3 +724,55 @@ function leaveAndGoTo(url){
     window.location.href = url;
 
 }
+
+/*
+==========================
+RESET THE MULTIPLAYER PANEL BACK TO THE SETUP SCREEN
+(used by Play Again / Practice Instead - these buttons only ever
+appear while already on dashboard.html, so we reset in place
+instead of navigating, since a same-page hash change doesn't
+reliably trigger a real page reload)
+==========================
+*/
+function resetMultiplayerView(){
+
+    document.getElementById("gameOverView").style.display = "none";
+    document.getElementById("gameView").style.display = "none";
+    document.getElementById("lobbyView").style.display = "none";
+    document.getElementById("setupView").style.display = "block";
+
+    document.getElementById("createName").value = "";
+    document.getElementById("joinName").value = "";
+    document.getElementById("roomCodeInput").value = "";
+
+    currentRoom = null;
+    hasAnsweredCurrent = false;
+    isSpectatorThisGame = false;
+
+    stopClientTimer();
+
+}
+
+function playAgain(){
+
+    socket.emit("leave-room");
+
+    resetMultiplayerView();
+
+    if (typeof showMainTab === "function") {
+        showMainTab("multiplayer");
+    }
+
+}
+
+function goToPractice(){
+
+    socket.emit("leave-room");
+
+    resetMultiplayerView();
+
+    if (typeof showMainTab === "function") {
+        showMainTab("practice");
+    }
+
+}
