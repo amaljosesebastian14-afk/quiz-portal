@@ -17,7 +17,6 @@
     <div>
         <a href="dashboard.html" data-i18n="nav.dashboard">Home</a>
         <a href="history.html" data-i18n="nav.myResults">My Results</a>
-        <a href="multiplayer.html">🎮 Multiplayer</a>
         <a href="leaderboard.html" data-i18n="nav.leaderboard">
             Leaderboard
         </a>
@@ -32,22 +31,167 @@
 
 <div class="container">
 
-    <h1 data-i18n="dashboard.heading">📚 Available Exams</h1>
+    <div class="mp-tabs">
+        <div class="mp-tab active" id="tabPractice" onclick="showMainTab('practice')">🎯 Practice Session</div>
+        <div class="mp-tab" id="tabMultiplayer" onclick="showMainTab('multiplayer')">🎮 Multiplayer Session</div>
+    </div>
 
-    <p class="welcome" data-i18n="dashboard.welcome">
-        Welcome back! Select an exam to begin.
-    </p>
+    <!-- ============================== -->
+    <!-- PRACTICE SESSION -->
+    <!-- ============================== -->
+    <div id="practicePanel">
 
-    <div id="examContainer" class="dashboard-grid">
+        <h1 data-i18n="dashboard.heading">📚 Available Exams</h1>
+
+        <p class="welcome" data-i18n="dashboard.welcome">
+            Welcome back! Select an exam to begin.
+        </p>
+
+        <div id="examContainer" class="dashboard-grid">
+
+        </div>
+
+    </div>
+
+    <!-- ============================== -->
+    <!-- MULTIPLAYER SESSION -->
+    <!-- ============================== -->
+    <div id="multiplayerPanel" style="display:none;">
+
+        <p class="welcome">Play live quizzes with your friends.</p>
+
+        <!-- STEP 1: Create or Join -->
+        <div id="setupView" class="card form-card">
+
+            <p id="connectionStatus" style="text-align:center; color:var(--text-faint); font-size:13px; margin-bottom:16px;">
+                🔄 Connecting to server...
+            </p>
+
+            <div class="mp-tabs">
+                <div class="mp-tab active" id="tabCreate" onclick="showTab('create')">Create Room</div>
+                <div class="mp-tab" id="tabJoin" onclick="showTab('join')">Join Room</div>
+            </div>
+
+            <div id="createPanel">
+
+                <label>Choose an Exam</label>
+                <select id="examSelect">
+                    <option value="">🔄 Loading exams...</option>
+                </select>
+
+                <label>Your Name</label>
+                <input type="text" id="createName" placeholder="Enter your name">
+
+                <button class="btn-full" onclick="createRoom(this)">
+                    🚀 Create Room
+                </button>
+
+            </div>
+
+            <div id="joinPanel" style="display:none;">
+
+                <label>Room Code</label>
+                <input type="text" id="roomCodeInput" placeholder="e.g. ABX921" style="text-transform:uppercase;">
+
+                <label>Your Name</label>
+                <input type="text" id="joinName" placeholder="Enter your name">
+
+                <button class="btn-full" onclick="joinRoom(this)">
+                    🔑 Join Room
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- STEP 2: Lobby -->
+        <div id="lobbyView" class="card" style="display:none;">
+
+            <div class="room-code-display">
+                <div class="code" id="lobbyRoomCode">------</div>
+                <p>Share this code with your friends</p>
+            </div>
+
+            <h2 id="lobbyExamTitle" style="margin-bottom:14px;"></h2>
+
+            <ul class="player-list" id="playerList"></ul>
+
+            <button class="btn-full" id="startGameBtn" style="display:none;" onclick="startGame(this)">
+                🚀 Start Game
+            </button>
+
+            <p class="welcome" id="waitingMessage">Waiting for the host to start the game...</p>
+
+        </div>
+
+        <!-- STEP 3: Live Game -->
+        <div id="gameView" style="display:none;">
+
+            <div id="suddenDeathBanner" style="display:none; text-align:center; background:var(--danger); color:#fff; padding:14px; border-radius:var(--radius); font-weight:800; margin-bottom:20px;">
+                ⚡ SUDDEN DEATH - One wrong answer and you're out!
+            </div>
+
+            <div id="spectatorBanner" style="display:none; text-align:center; background:var(--surface-2); color:var(--text-faint); padding:12px; border-radius:var(--radius); margin-bottom:20px;">
+                👀 You're spectating - watch the tiebreaker live below
+            </div>
+
+            <div class="timer-box" id="mpTimerBox">
+                ⏰ <span id="mpTimer">15</span>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="mpProgressBar"></div>
+            </div>
+
+            <div class="question-card">
+
+                <div class="question-title" id="mpQuestionMeta">Question 1 / 10</div>
+
+                <h3 id="mpQuestionText"></h3>
+
+                <div class="options" id="mpOptions"></div>
+
+            </div>
+
+            <p class="welcome" id="answerStatusText"></p>
+
+            <div class="card" id="liveScoresCard" style="margin-top:20px;">
+                <h2 style="font-size:16px; margin-bottom:12px;">Live Scores</h2>
+                <ul class="player-list" id="liveScoreList"></ul>
+            </div>
+
+        </div>
+
+        <!-- STEP 4: Game Over -->
+        <div id="gameOverView" class="card result-card" style="display:none;">
+
+            <h1>🏆 Game Over</h1>
+
+            <div class="result-box">
+                <h2 id="winnerLabel">Winner</h2>
+                <h1 id="winnerName" style="font-size:32px;">-</h1>
+            </div>
+
+            <ul class="player-list" id="finalStandingsList" style="margin-top:24px;"></ul>
+
+            <div class="action-buttons">
+                <button onclick="leaveAndGoTo('dashboard.html#multiplayer')">🔄 Play Again</button>
+                <button class="btn-success" onclick="leaveAndGoTo('dashboard.html')">🎯 Practice Instead</button>
+            </div>
+
+        </div>
 
     </div>
 
 </div>
 
-<script src="js/dashboard.js"></script>
+<script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 <script src="assets/i18n.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/multiplayer.js"></script>
 
 <script>
+
 function logout(){
 
     localStorage.clear();
@@ -55,6 +199,47 @@ function logout(){
     window.location =
     "login.html";
 }
+
+/*
+==========================
+MAIN TAB SWITCHING (Practice / Multiplayer)
+==========================
+*/
+function showMainTab(tab){
+
+    const practicePanel = document.getElementById("practicePanel");
+    const multiplayerPanel = document.getElementById("multiplayerPanel");
+    const tabPractice = document.getElementById("tabPractice");
+    const tabMultiplayer = document.getElementById("tabMultiplayer");
+
+    if(tab === "multiplayer"){
+
+        practicePanel.style.display = "none";
+        multiplayerPanel.style.display = "block";
+        tabPractice.classList.remove("active");
+        tabMultiplayer.classList.add("active");
+
+        window.location.hash = "multiplayer";
+
+    }
+    else{
+
+        practicePanel.style.display = "block";
+        multiplayerPanel.style.display = "none";
+        tabPractice.classList.add("active");
+        tabMultiplayer.classList.remove("active");
+
+        window.location.hash = "";
+
+    }
+
+}
+
+// Auto-open the Multiplayer tab if linked here with #multiplayer
+if(window.location.hash === "#multiplayer"){
+    showMainTab("multiplayer");
+}
+
 </script>
 
 </body>
