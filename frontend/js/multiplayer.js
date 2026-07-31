@@ -95,15 +95,30 @@ function showTab(tab){
 LOAD EXAM LIST FOR "CREATE ROOM"
 ==========================
 */
-async function loadExamsForSelect(){
+async function loadExamsForSelect(retryCount = 0){
+
+    const examSelect = document.getElementById("examSelect");
 
     try{
 
         const response =
         await fetch(`${SOCKET_URL}/api/exam/list`);
 
+        if (!response.ok) {
+            throw new Error(`Server responded with ${response.status}`);
+        }
+
         const data =
         await response.json();
+
+        if (!data.exams || data.exams.length === 0) {
+
+            examSelect.innerHTML =
+                `<option value="">No exams available</option>`;
+
+            return;
+
+        }
 
         let html = "";
 
@@ -113,12 +128,31 @@ async function loadExamsForSelect(){
 
         });
 
-        document.getElementById("examSelect").innerHTML = html;
+        examSelect.innerHTML = html;
 
     }
     catch(error){
 
         console.error("Failed to load exams:", error);
+
+        // Server may still be waking up (Render free tier cold start) -
+        // retry a couple of times before showing a permanent error
+        if (retryCount < 3) {
+
+            examSelect.innerHTML =
+                `<option value="">🔄 Still loading... (server waking up, attempt ${retryCount + 1}/3)</option>`;
+
+            setTimeout(() => {
+                loadExamsForSelect(retryCount + 1);
+            }, 5000);
+
+        }
+        else {
+
+            examSelect.innerHTML =
+                `<option value="">⚠️ Failed to load. Tap Create Room to retry.</option>`;
+
+        }
 
     }
 
@@ -147,6 +181,17 @@ function createRoom(btn){
     }
 
     if(!examId){
+
+        const examSelect = document.getElementById("examSelect");
+
+        if (examSelect.options.length <= 1 && examSelect.value === "") {
+
+            alert("Exams didn't load yet - retrying now, please wait a moment and try again.");
+            loadExamsForSelect();
+            return;
+
+        }
+
         alert("Please choose an exam");
         return;
     }
